@@ -552,10 +552,10 @@ body.menu-open { overflow: hidden; }
 <!-- 信頼の数字 -->
 <section class="trust-bar">
   <div class="trust-inner">
-    <div class="trust-item"><div class="trust-num">17<small>年</small></div><div class="trust-label">創業からの実績</div></div>
-    <div class="trust-item"><div class="trust-num">70<small>名</small></div><div class="trust-label">プロのスタッフ</div></div>
-    <div class="trust-item"><div class="trust-num">60<small>台超</small></div><div class="trust-label">自社保有車両</div></div>
-    <div class="trust-item"><div class="trust-num">150<small>社超</small></div><div class="trust-label">お取引企業様</div></div>
+    <div class="trust-item"><div class="trust-num" data-count="17" data-suffix="年"><span class="count-num">0</span><small>年</small></div><div class="trust-label">創業からの実績</div></div>
+    <div class="trust-item"><div class="trust-num" data-count="70" data-suffix="名"><span class="count-num">0</span><small>名</small></div><div class="trust-label">プロのスタッフ</div></div>
+    <div class="trust-item"><div class="trust-num" data-count="60" data-suffix="台超"><span class="count-num">0</span><small>台超</small></div><div class="trust-label">自社保有車両</div></div>
+    <div class="trust-item"><div class="trust-num" data-count="150" data-suffix="社超"><span class="count-num">0</span><small>社超</small></div><div class="trust-label">お取引企業様</div></div>
   </div>
 </section>
 
@@ -880,6 +880,33 @@ body.menu-open { overflow: hidden; }
 </div>
 
 <script>
+// カウントアップアニメーション
+function animateCount(el, target, duration) {
+  const start = performance.now();
+  const update = (now) => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    el.textContent = Math.floor(ease * target);
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(update);
+}
+const trustNums = document.querySelectorAll('.trust-num[data-count]');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      entry.target.dataset.animated = 'true';
+      const target = parseInt(entry.target.dataset.count);
+      const numEl = entry.target.querySelector('.count-num');
+      const duration = target >= 100 ? 2000 : target >= 50 ? 1800 : 1500;
+      animateCount(numEl, target, duration);
+    }
+  });
+}, { threshold: 0.5 });
+trustNums.forEach(el => countObserver.observe(el));
+
 // モバイルメニュー
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
