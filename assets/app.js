@@ -194,3 +194,38 @@ document.querySelectorAll('.faq-q').forEach(function(q){
     subLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+cur); });
   });
 })();
+
+/* === v4: 見出しリビール（ふわっと表示） === */
+(function(){
+  var sel = '.hero-title, .hero-subtitle, .page-hero h1, .page-hero p.sub, .section-title, .section-eyebrow, .cta-title, .block-head';
+  var els = Array.prototype.slice.call(document.querySelectorAll(sel));
+  if(!els.length || !('IntersectionObserver' in window)) return;
+  els.forEach(function(el){ el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+})();
+
+/* === v4: セクション間 波形ディバイダ（装飾波線・全ページ） === */
+(function(){
+  if(document.body.dataset.waved) return; document.body.dataset.waved = '1';
+  function makeWave(){
+    var d=document.createElement('div'); d.className='wave-divider';
+    d.innerHTML='<svg viewBox="0 0 860 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">'+
+      '<path class="w2" d="M0,23 C143,5 287,41 430,23 C573,5 717,41 860,23"></path>'+
+      '<path class="w1" d="M0,19 C143,1 287,37 430,19 C573,1 717,37 860,19"></path></svg>';
+    return d;
+  }
+  function divideBetween(items){
+    items.forEach(function(el,i){ if(i===0) return; el.parentNode.insertBefore(makeWave(), el); });
+  }
+  // トップ等：body直下の<section>間
+  divideBetween(Array.prototype.filter.call(document.body.children,function(e){return e.tagName==='SECTION';}));
+  // サブページ：.content内の.block間
+  document.querySelectorAll('.content').forEach(function(c){
+    divideBetween(Array.prototype.filter.call(c.children,function(e){return e.classList.contains('block');}));
+  });
+})();
