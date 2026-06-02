@@ -816,3 +816,16 @@ body.menu-open { overflow: hidden; }
 .nav .mega-card { padding:14px 16px; border-radius:12px; }
 @media (max-width:1180px){ .nav .nav-item { padding:10px 11px; font-size:14px; } }
 @media (max-width:1040px){ .logo-divider,.logo-tagline{display:none;} }
+
+/* ===== ヒーローのフィルターを明るく＋文字の視認性向上 ===== */
+.hero-overlay { background: linear-gradient(90deg, rgba(10,15,28,0.60) 0%, rgba(10,15,28,0.26) 52%, rgba(10,15,28,0.05) 100%); }
+.hero-video-bg { filter: saturate(1.06) contrast(1.04); }
+.hero-eyebrow { text-shadow: 0 1px 8px rgba(0,0,0,0.45); }
+.hero-title { text-shadow: 0 2px 16px rgba(0,0,0,0.55); }
+.hero-subtitle { color: rgba(255,255,255,0.95); text-shadow: 0 1px 10px rgba(0,0,0,0.5); }
+.page-hero::after { background: linear-gradient(100deg, rgba(26,31,46,0.58) 0%, rgba(26,31,46,0.33) 50%, rgba(26,31,46,0.15) 100%); }
+.page-hero-bg { filter: saturate(1.06) contrast(1.04); }
+.page-hero .eyebrow { text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+.page-hero h1 { text-shadow: 0 2px 16px rgba(0,0,0,0.55); }
+.page-hero p.sub { color: rgba(255,255,255,0.92); text-shadow: 0 1px 10px rgba(0,0,0,0.5); }
+@media (max-width:768px){ .hero-overlay { background: linear-gradient(180deg, rgba(15,20,32,0.42) 0%, rgba(15,20,32,0.68) 100%); } }
