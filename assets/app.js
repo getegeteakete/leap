@@ -197,7 +197,7 @@ document.querySelectorAll('.faq-q').forEach(function(q){
 
 /* === v4: 見出しリビール（ふわっと表示） === */
 (function(){
-  var sel = '.hero-title, .hero-subtitle, .page-hero h1, .page-hero p.sub, .section-title, .section-eyebrow, .cta-title, .block-head';
+  var sel = '.hero-title, .hero-subtitle, .page-hero h1, .page-hero p.sub, .section-title, .section-eyebrow, .cta-title, .block-head, .rec-head .eyebrow, .rec-head h2, .rec-entry h2, .rec-stat';
   var els = Array.prototype.slice.call(document.querySelectorAll(sel));
   if(!els.length || !('IntersectionObserver' in window)) return;
   els.forEach(function(el){ el.classList.add('reveal'); });
