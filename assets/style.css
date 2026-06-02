@@ -829,3 +829,7 @@ body.menu-open { overflow: hidden; }
 .page-hero h1 { text-shadow: 0 2px 16px rgba(0,0,0,0.55); }
 .page-hero p.sub { color: rgba(255,255,255,0.92); text-shadow: 0 1px 10px rgba(0,0,0,0.5); }
 @media (max-width:768px){ .hero-overlay { background: linear-gradient(180deg, rgba(15,20,32,0.42) 0%, rgba(15,20,32,0.68) 100%); } }
+
+/* 固定サイドバナー：ヘッダーに被らないよう、ヘッダー下〜画面下の範囲で縦中央配置 */
+.side-banners { top: 128px; bottom: 16px; transform: none; justify-content: center; }
+@media (max-width: 1024px){ .side-banners { top: 116px; } }
