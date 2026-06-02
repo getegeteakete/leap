@@ -194,20 +194,50 @@ a { color: inherit; }
 
 /* Floating Action Buttons */
 /* 固定縦長バナー */
-.side-banners { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 98; display: flex; flex-direction: column; gap: 0; }
-.side-banner { writing-mode: vertical-rl; text-orientation: mixed; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 28px 14px; cursor: pointer; text-decoration: none; transition: all 0.25s; position: relative; overflow: hidden; }
-.side-banner::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.25s; }
-.side-banner:hover::before { opacity: 1; }
-.side-banner-corp { background: var(--ink); color: #fff; border-left: none; }
-.side-banner-corp::before { background: var(--primary); }
-.side-banner-corp:hover { letter-spacing: 0.12em; }
-.side-banner-indiv { background: var(--primary); color: #fff; }
-.side-banner-indiv::before { background: var(--primary-dark); }
-.side-banner-indiv:hover { letter-spacing: 0.12em; }
-.side-banner-label { font-size: 13px; font-weight: 700; letter-spacing: 0.25em; line-height: 1; position: relative; z-index: 1; }
-.side-banner-sub { font-size: 9px; letter-spacing: 0.2em; opacity: 0.75; position: relative; z-index: 1; font-weight: 500; }
-.side-banner-icon { position: relative; z-index: 1; width: 18px; height: 18px; opacity: 0.85; }
-.side-banner-icon svg { width: 18px; height: 18px; }
+.side-banners { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 98; display: flex; flex-direction: column; gap: 10px; }
+.side-banner {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 36px 16px 36px 15px; cursor: pointer; text-decoration: none;
+  position: relative; overflow: hidden;
+  border-left: 4px solid var(--accent);
+  border-radius: 12px 0 0 12px;
+  box-shadow: -5px 7px 24px rgba(26,31,46,0.32);
+  transition: transform 0.32s cubic-bezier(.2,.85,.25,1), box-shadow 0.32s, padding 0.32s, background 0.32s;
+}
+.side-banner-corp  { background: linear-gradient(135deg, #2b3654 0%, #1a1f2e 100%); color:#fff; }
+.side-banner-indiv { background: linear-gradient(135deg, #e84b2c 0%, #c8341e 100%); color:#fff; }
+/* 光沢スイープ（定期的にキラッと光る） */
+.side-banner::before {
+  content:''; position:absolute; top:-40%; left:-70%; width:45%; height:180%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+  transform: skewX(-18deg); pointer-events:none; z-index:3;
+  animation: sb-sheen 4.5s ease-in-out infinite;
+}
+.side-banner-indiv::before { animation-delay: 2.2s; }
+@keyframes sb-sheen { 0%,68% { left:-70%; } 84%,100% { left:170%; } }
+/* クリック誘導の矢印（左へゆらゆら） */
+.side-banner::after {
+  content:''; position:absolute; left:9px; top:50%; width:7px; height:7px;
+  border-left:2px solid rgba(255,255,255,0.92); border-bottom:2px solid rgba(255,255,255,0.92);
+  transform: translateY(-50%) rotate(45deg); z-index:4; pointer-events:none;
+  animation: sb-bob 1.3s ease-in-out infinite;
+}
+@keyframes sb-bob { 0%,100% { left:9px; } 50% { left:3px; } }
+/* ホバーで飛び出す */
+.side-banner:hover {
+  transform: translateX(-12px);
+  box-shadow: -10px 12px 34px rgba(200,52,30,0.45);
+  padding-right: 22px;
+}
+.side-banner-corp:hover  { background: linear-gradient(135deg, #c8341e 0%, #a02817 100%); }
+.side-banner-indiv:hover { background: linear-gradient(135deg, #ff5b3d 0%, #d63a22 100%); }
+.side-banner-label { font-size: 14px; font-weight: 700; letter-spacing: 0.28em; line-height: 1; position: relative; z-index: 2; }
+.side-banner-sub { font-size: 9px; letter-spacing: 0.2em; opacity: 0.82; position: relative; z-index: 2; font-weight: 500; }
+.side-banner-icon { position: relative; z-index: 2; width: 19px; height: 19px; opacity: 0.95; }
+.side-banner-icon svg { width: 19px; height: 19px; }
+/* 動きを控えたい利用者へ配慮 */
+@media (prefers-reduced-motion: reduce) { .side-banner::before, .side-banner::after { animation: none; } }
 /* スマホでは非表示 */
 @media (max-width: 768px) { .side-banners { display: none; } }
 
