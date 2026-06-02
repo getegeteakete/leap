@@ -793,3 +793,9 @@ body.menu-open { overflow: hidden; }
 .nav .nav-item::after { left: 11px; right: 11px; }
 .nav .nav-tel { white-space: nowrap; padding: 11px 18px; font-size: 14px; }
 @media (max-width: 1200px){ .logo-divider, .logo-tagline { display: none; } .nav .nav-item { padding: 9px 9px; font-size: 13px; gap: 6px; } }
+
+/* ===== 本社 施設ギャラリー セクション ===== */
+.facility-section{ background: var(--bg); padding: 96px 0; }
+.facility-inner{ max-width:1280px; margin:0 auto; padding:0 24px; }
+.facility-section .section-center{ margin-bottom:40px; }
+.facility-section .gallery-item .gal-tag{ background: var(--ink); }
