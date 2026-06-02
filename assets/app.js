@@ -38,6 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (headerLogo && mobileMenuLogo) {
     mobileMenuLogo.src = headerLogo.src;
   }
+  // スマホメニュー：カテゴリをアコーディオン化（初期は閉じてカテゴリのみ表示）
+  document.querySelectorAll('.mm-group > span').forEach(function (s) {
+    s.setAttribute('role', 'button');
+    s.setAttribute('tabindex', '0');
+    const toggle = function () { s.parentElement.classList.toggle('open'); };
+    s.addEventListener('click', toggle);
+    s.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
 });
 
 // 営業ステータス
