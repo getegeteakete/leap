@@ -178,37 +178,6 @@ function addTyping() {
 }
 function removeTyping() { const t = document.querySelector('.typing-msg'); if (t) t.remove(); }
 
-async function calculateEstimate() {
-  const src = document.getElementById('source').value;
-  const dst = document.getElementById('destination').value;
-  const w = document.getElementById('weight').value;
-  const d = document.getElementById('distance').value;
-  const t = document.getElementById('type').value;
-  const btn = document.getElementById('estimateBtn');
-  btn.disabled = true;
-  btn.innerHTML = 'AIが計算中です...';
-  document.getElementById('resultArea').innerHTML = '<div class="result-placeholder"><div class="typing"><span></span><span></span><span></span></div><p style="margin-top:16px;font-size:13px;">AIが見積もりを計算しています...</p></div>';
-  const p = `以下の配送条件で概算見積もりをお願いします。
-
-出発地: ${src}
-到着地: ${dst}
-配送種別: ${t}
-重量: ${w}kg
-距離: ${d}km
-
-リープの料金体系を踏まえて、わかりやすく見積もりを提示してください。
-最後に「正式なお見積もりは本社（048-796-3296）にお問い合わせください」とご案内ください。`;
-  try {
-    const reply = await callClaude([{ role: 'user', content: p }], COMPANY_PROMPT);
-    document.getElementById('resultArea').innerHTML = '<div class="result-content">' + reply.replace(/\n/g, '<br>') + '</div>';
-  } catch (e) {
-    document.getElementById('resultArea').innerHTML = '<div class="result-placeholder"><p>エラーが発生しました。<br>お電話（048-796-3296）でお問い合わせください。</p></div>';
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<span class="icon icon-16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg></span>AIに見積もりを依頼する';
-  }
-}
-
 // FAQ アコーディオン
 document.querySelectorAll('.faq-q').forEach(function(q){
   q.addEventListener('click', function(){ this.parentElement.classList.toggle('open'); });
