@@ -1005,3 +1005,23 @@ video.page-hero-bg{background:var(--ink);}
   .rec-gallery img{ height:150px; }
   .rec-style{ min-height:280px; padding:26px; }
 }
+
+/* ===== v6: TOPサービスカード／企業様バナーの hover を赤→紺×ゴールドへ変更 ===== */
+/* --- サービスカード(.svc-grid-item) --- */
+.svc-grid-item:hover .svc-cap{
+  background:linear-gradient(to top,rgba(26,31,46,.93) 0%,rgba(26,31,46,.5) 55%,rgba(26,31,46,.08) 100%);
+}
+.svc-grid-item:hover .svc-no{ color:var(--accent); }
+.svc-grid-item .svc-name{ position:relative; display:inline-block; align-self:flex-start; }
+.svc-grid-item .svc-name::after{
+  content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0;
+  background:var(--accent); transition:width .4s ease;
+}
+.svc-grid-item:hover .svc-name::after{ width:100%; }
+.svc-grid-item .svc-arrow{ transition:transform .35s ease, color .35s ease, opacity .35s ease; }
+.svc-grid-item:hover .svc-arrow{ transform:translateX(6px); color:var(--accent); opacity:1; }
+
+/* --- 企業様向けサイドバナー(.side-banner-corp)：hoverは紺を明るく＋影も紺系 --- */
+.side-banner-corp:hover{ background:linear-gradient(135deg,#374563 0%,#232a3e 100%); }
+.side-banner-corp:hover.side-banner,
+.side-banner-corp:hover{ box-shadow:-10px 12px 34px rgba(26,31,46,0.5); }
