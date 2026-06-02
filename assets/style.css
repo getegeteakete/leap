@@ -799,3 +799,20 @@ body.menu-open { overflow: hidden; }
 .facility-inner{ max-width:1280px; margin:0 auto; padding:0 24px; }
 .facility-section .section-center{ margin-bottom:40px; }
 .facility-section .gallery-item .gal-tag{ background: var(--ink); }
+
+/* ===== ヘッダー再設計：トップは文字のみ／ホバーでアイコン付きメガ ===== */
+.nav { gap: 2px; }
+.nav .nav-item { display:inline-flex; align-items:center; gap:5px; padding:12px 15px; border-radius:0; background:none !important; font-family:'Noto Sans JP',sans-serif; font-size:15px; font-weight:600; color:var(--ink); letter-spacing:.05em; white-space:nowrap; position:relative; transition:color .2s; }
+.nav .nav-item:hover, .nav .has-mega:hover > .nav-item { color:var(--primary); }
+.nav .nav-item::after { content:''; position:absolute; left:15px; right:15px; bottom:6px; height:2px; background:var(--primary); border-radius:2px; transform:scaleX(0); transform-origin:center; transition:transform .25s; }
+.nav .nav-item:hover::after, .nav .has-mega:hover > .nav-item::after { transform:scaleX(1); }
+.nav .caret { display:inline-flex; align-items:center; color:var(--ink-3); transition:transform .25s,color .2s; }
+.nav .caret svg { width:12px; height:12px; }
+.nav .has-mega:hover .caret { transform:rotate(180deg); color:var(--primary); }
+/* メガの余白・装飾を大手水準に */
+.nav .mega { padding:22px; border-radius:16px; margin-top:14px; box-shadow:0 28px 70px rgba(26,31,46,0.20); }
+.nav .mega-head { padding:0 12px 14px; font-size:11px; }
+.nav .mega-grid { gap:4px; }
+.nav .mega-card { padding:14px 16px; border-radius:12px; }
+@media (max-width:1180px){ .nav .nav-item { padding:10px 11px; font-size:14px; } }
+@media (max-width:1040px){ .logo-divider,.logo-tagline{display:none;} }
