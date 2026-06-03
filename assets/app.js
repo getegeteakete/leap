@@ -94,52 +94,33 @@ window.addEventListener('scroll', () => {
 });
 
 // Chat
-const chatMessages = [{ role: 'assistant', content: 'こんにちは。株式会社リープのAIアシスタントです。配送のご相談、お見積もり、営業所のご案内など、お気軽にお尋ねください。' }];
+const CHAT_MODE = /recruit/i.test(location.pathname) ? 'recruit' : 'company';
+const chatMessages = []; // Messages API 用の履歴（user 始まり）。挨拶はHTMLの静的バブルなので含めない。
 function toggleChat() { document.getElementById('chatPanel').classList.toggle('open'); }
 
-const COMPANY_PROMPT = `あなたは株式会社リープ（埼玉県春日部市）のAIアシスタントです。丁寧な敬語で、温かく親身に対応してください。
-
-【会社概要】
-社名：株式会社リープ
-モットー：運ぶ信頼 届ける真心
-設立：平成19年7月3日（創業17年）
-代表取締役：森本 正宏
-資本金：1,000万円 / 年商：11億円 / 従業員：70名
-
-【営業所】
-- 本社：埼玉県春日部市上柳77（TEL 048-796-3296、FAX 048-796-3298）営業時間 8:30-18:00（平日）
-- 神奈川営業所：東京都稲城市若葉台3-12-4（TEL 042-401-4098）
-- 茨城営業所：茨城県土浦市虫掛3632-2（TEL 029-896-9700）
-
-【事業内容】
-1. 一般貨物自動車運送（関自貨第973号）- 関東を中心に日本全国対応
-2. 家電配送・設置サービス（小型〜大型、ツーマン体制、基本操作説明含む）
-3. エアコン・電気工事（埼玉県知事第20210164号）
-4. ユニットバス施工（大手メーカーより一貫受注）
-5. 一時保管・共配・3PL（本社倉庫300坪、茨城倉庫70坪）
-6. 産業廃棄物収集運搬（東京・千葉・埼玉・茨城）
-7. 輸送業者間共同配送
-
-【保有車両（計60台超）】
-1tバン2台 / 2tショート2台 / 2t標準ロング27台 / 2tロングゲート6台 / 4tセミワイドウィングゲート1台 / 4tフルワイドウィングゲート18台
-協力会社専属車両10台
-
-【認証】Gマーク、働きやすい職場認証、埼玉県シニア活躍推進宣言企業
-
-【主要取引先】佐川急便、日通トランスポート、アートバンライン、大和物流、新潟運輸グループ 他150社超
-
-【倉庫料金】本社倉庫：坪4,000円、茨城倉庫：坪2,500円（共に相談可、3期制あり）
-
-質問に正確かつ温かく応答し、見積もりは条件を整理して概算を示し、最終的には電話（048-796-3296）でのお問い合わせをご案内してください。`;
-
-async function callClaude(messages, system) {
-  const r = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, system: system, messages: messages })
+// 求人ページ（recruit / recruit2）ではチャットの挨拶・ヘッダーを採用向けに差し替え
+(function initChatPersona(){
+  if (CHAT_MODE !== 'recruit') return;
+  document.addEventListener('DOMContentLoaded', function(){
+    var head = document.querySelector('.chat-header-info');
+    if (head) head.innerHTML = '<h4>リープ 採用アシスタント</h4><p>お仕事・募集について何でもどうぞ</p>';
+    var first = document.querySelector('#chatMessages .chat-msg.bot .chat-msg-bubble');
+    if (first) first.innerHTML = 'こんにちは。株式会社リープの採用アシスタントです。<br><br>募集職種・お給与や働き方・応募の流れ・会社のことなど、お気軽にお尋ねください。';
+    var input = document.getElementById('chatInput');
+    if (input) input.setAttribute('placeholder', '例）未経験でも大丈夫ですか？');
   });
-  const d = await r.json();
-  return d.content[0].text;
+})();
+
+async function callClaude(messages, mode) {
+  const r = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: messages, mode: mode })
+  });
+  let d = {};
+  try { d = await r.json(); } catch (e) {}
+  if (!r.ok || d.error) throw new Error(d.error || ('HTTP ' + r.status));
+  return d.reply;
 }
 
 async function sendMessage() {
@@ -153,13 +134,16 @@ async function sendMessage() {
   btn.disabled = true;
   addTyping();
   try {
-    const reply = await callClaude(chatMessages, COMPANY_PROMPT);
+    const reply = await callClaude(chatMessages, CHAT_MODE);
     removeTyping();
     addMessage('bot', reply);
     chatMessages.push({ role: 'assistant', content: reply });
   } catch (e) {
     removeTyping();
-    addMessage('bot', '申し訳ございません。エラーが発生しました。お電話（048-796-3296）でお問い合わせください。');
+    var em = (e && e.message && e.message.indexOf('HTTP') !== 0)
+      ? e.message
+      : '申し訳ございません。通信エラーが発生しました。お電話（048-796-3296）でお問い合わせください。';
+    addMessage('bot', em);
   } finally { btn.disabled = false; }
 }
 
