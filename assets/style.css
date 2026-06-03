@@ -1089,3 +1089,16 @@ video.page-hero-bg{background:var(--ink);}
 .footer-col h4{ letter-spacing:.28em; }
 .footer-col a{ transition:color .2s, padding-left .2s; }
 .footer-col a:hover{ padding-left:4px; color:var(--accent); }
+
+/* === 採用バナー（求人・3本目）＋スマホ右固定表示 === */
+.side-banner-recruit{ background:linear-gradient(135deg,#e3a23a 0%,#c2851c 100%); color:#fff; }
+.side-banner-recruit::before{ animation-delay:3.6s; }
+.side-banner-recruit:hover{ background:linear-gradient(135deg,#efb24e 0%,#d2962a 100%); box-shadow:-10px 12px 34px rgba(194,133,28,.5); }
+@media (max-width: 768px){
+  .side-banners{ display:flex !important; top:50% !important; bottom:auto !important; transform:translateY(-50%) !important; justify-content:center; gap:0; }
+  .side-banner-corp, .side-banner-indiv{ display:none !important; }
+  .side-banner-recruit{ padding:24px 10px 24px 9px; box-shadow:-4px 6px 18px rgba(26,31,46,.32); }
+  .side-banner-recruit .side-banner-label{ font-size:12px; letter-spacing:.18em; }
+  .side-banner-recruit .side-banner-sub{ font-size:8px; }
+  .side-banner-recruit .side-banner-icon, .side-banner-recruit .side-banner-icon svg{ width:16px; height:16px; }
+}
