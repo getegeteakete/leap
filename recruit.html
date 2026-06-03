@@ -128,6 +128,23 @@
   <a href="/recruit2.html">電気工事士（業務委託）</a>
 </div></div>
 
+<!-- 走るトラック（一筆書き風） -->
+<div class="truck-run" aria-hidden="true">
+  <span class="truck-run-road"></span>
+  <span class="truck-run-car">
+    <svg viewBox="0 0 178 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 60 L18 30 L25 22 L58 22 L58 13 L150 13 L150 60 Z"/>
+      <path d="M58 13 L58 60"/>
+      <rect x="25" y="29" width="21" height="13" rx="2"/>
+      <circle cx="42" cy="63" r="10"/><circle cx="42" cy="63" r="2.6"/>
+      <circle cx="118" cy="63" r="10"/><circle cx="118" cy="63" r="2.6"/>
+      <path d="M156 22 L172 22" opacity=".5"/>
+      <path d="M156 33 L176 33" opacity=".5"/>
+      <path d="M156 44 L168 44" opacity=".5"/>
+    </svg>
+  </span>
+</div>
+
 <section class="rec-stats">
   <div class="rec-stats-inner">
     <div class="rec-stat"><b>17<small>年</small></b><span>創業からの実績</span></div>
@@ -370,5 +387,19 @@
   </div>
 </div>
 <script src="/assets/app.js?v=9"></script>
+<style>
+/* 一筆書き風トラックが右→左に走る装飾ストリップ */
+.truck-run{ position:relative; height:98px; overflow:hidden; background:var(--bg); }
+.truck-run-road{ position:absolute; left:0; right:0; bottom:22px; height:3px;
+  background:repeating-linear-gradient(90deg, var(--line) 0 16px, transparent 16px 32px);
+  animation:truckRoad 1.1s linear infinite; }
+.truck-run-car{ position:absolute; bottom:14px; left:0; width:152px; color:var(--primary);
+  will-change:transform; animation:truckDrive 8.5s linear infinite; }
+.truck-run-car svg{ display:block; width:100%; height:auto; }
+@keyframes truckDrive{ from{ transform:translateX(calc(100vw + 200px)); } to{ transform:translateX(-200px); } }
+@keyframes truckRoad{ from{ background-position:0 0; } to{ background-position:-32px 0; } }
+@media(max-width:768px){ .truck-run{ height:78px; } .truck-run-car{ width:116px; bottom:11px; } .truck-run-road{ bottom:18px; } }
+@media (prefers-reduced-motion: reduce){ .truck-run-car{ animation:none; left:auto; right:6vw; } .truck-run-road{ animation:none; } }
+</style>
 </body>
 </html>
