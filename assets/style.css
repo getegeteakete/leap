@@ -196,9 +196,9 @@ a { color: inherit; }
 /* 固定縦長バナー */
 .side-banners { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 98; display: flex; flex-direction: column; gap: 10px; }
 .side-banner {
-  writing-mode: vertical-rl; text-orientation: mixed;
-  display: flex; align-items: center; justify-content: center; gap: 14px;
-  padding: 36px 16px 36px 15px; cursor: pointer; text-decoration: none;
+  writing-mode: horizontal-tb; text-orientation: initial;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  padding: 13px 11px 13px 13px; cursor: pointer; text-decoration: none;
   position: relative; overflow: hidden;
   border-left: 4px solid var(--accent);
   border-radius: 12px 0 0 12px;
@@ -232,8 +232,8 @@ a { color: inherit; }
 }
 .side-banner-corp:hover  { background: linear-gradient(135deg, #c8341e 0%, #a02817 100%); }
 .side-banner-indiv:hover { background: linear-gradient(135deg, #ff5b3d 0%, #d63a22 100%); }
-.side-banner-label { font-size: 14px; font-weight: 700; letter-spacing: 0.28em; line-height: 1; position: relative; z-index: 2; }
-.side-banner-sub { font-size: 9px; letter-spacing: 0.2em; opacity: 0.82; position: relative; z-index: 2; font-weight: 500; }
+.side-banner-label { font-size: 13px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.1; white-space: nowrap; text-align: center; position: relative; z-index: 2; }
+.side-banner-sub { font-size: 9px; letter-spacing: 0.12em; opacity: 0.82; text-align: center; position: relative; z-index: 2; font-weight: 500; }
 .side-banner-icon { position: relative; z-index: 2; width: 19px; height: 19px; opacity: 0.95; }
 .side-banner-icon svg { width: 19px; height: 19px; }
 /* 動きを控えたい利用者へ配慮 */
@@ -241,7 +241,7 @@ a { color: inherit; }
 /* スマホでは非表示 */
 @media (max-width: 768px) { .side-banners { display: none; } }
 
-.fab-container { position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 12px; z-index: 99; }
+.fab-container { position: fixed; bottom: 24px; right: 112px; display: flex; flex-direction: column; gap: 12px; z-index: 99; }
 .fab { width: 52px; height: 52px; border-radius: var(--r); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
 .fab-top { background: #fff; color: var(--ink); border: 1px solid var(--line); opacity: 0; pointer-events: none; transform: translateY(20px); }
 .fab-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
