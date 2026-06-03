@@ -125,21 +125,28 @@
   <a href="/recruit2.html" class="active">電気工事士（業務委託）</a>
 </div></div>
 
-<!-- 走るトラック（一筆書き風） -->
-<div class="truck-run" aria-hidden="true">
-  <span class="truck-run-road"></span>
-  <span class="truck-run-car">
-    <svg viewBox="0 0 178 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M18 60 L18 30 L25 22 L58 22 L58 13 L150 13 L150 60 Z"/>
-      <path d="M58 13 L58 60"/>
-      <rect x="25" y="29" width="21" height="13" rx="2"/>
-      <circle cx="42" cy="63" r="10"/><circle cx="42" cy="63" r="2.6"/>
-      <circle cx="118" cy="63" r="10"/><circle cx="118" cy="63" r="2.6"/>
-      <path d="M156 22 L172 22" opacity=".5"/>
-      <path d="M156 33 L176 33" opacity=".5"/>
-      <path d="M156 44 L168 44" opacity=".5"/>
-    </svg>
-  </span>
+<!-- 電気工事アニメーション（線画：プラグ接続＆スパーク） -->
+<div class="elec-anim" aria-hidden="true">
+  <svg viewBox="0 0 340 140" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <g>
+      <rect x="234" y="40" width="64" height="64" rx="10"/>
+      <line x1="254" y1="60" x2="254" y2="84"/>
+      <line x1="278" y1="60" x2="278" y2="84"/>
+    </g>
+    <g class="el-plug">
+      <rect x="150" y="52" width="40" height="40" rx="8"/>
+      <line x1="190" y1="64" x2="216" y2="64"/>
+      <line x1="190" y1="80" x2="216" y2="80"/>
+      <path d="M150 72 C120 72 112 106 78 106 L40 106"/>
+    </g>
+    <g class="el-spark" fill="none" stroke-width="2.6">
+      <path d="M226 44 l-7 12 l5 0 l-6 14"/>
+      <line x1="240" y1="56" x2="251" y2="48"/>
+      <line x1="243" y1="72" x2="256" y2="72"/>
+      <line x1="240" y1="88" x2="251" y2="96"/>
+    </g>
+    <circle class="el-glow" cx="224" cy="72" r="9" fill="none" stroke-width="2.6"/>
+  </svg>
 </div>
 
 <section class="rec-stats">
@@ -342,18 +349,17 @@
 </div>
 <script src="/assets/app.js?v=9"></script>
 <style>
-/* 一筆書き風トラックが右→左に走る装飾ストリップ */
-.truck-run{ position:relative; height:98px; overflow:hidden; background:var(--bg); }
-.truck-run-road{ position:absolute; left:0; right:0; bottom:22px; height:3px;
-  background:repeating-linear-gradient(90deg, var(--line) 0 16px, transparent 16px 32px);
-  animation:truckRoad 1.1s linear infinite; }
-.truck-run-car{ position:absolute; bottom:14px; left:0; width:152px; color:var(--primary);
-  will-change:transform; animation:truckDrive 8.5s linear infinite; }
-.truck-run-car svg{ display:block; width:100%; height:auto; }
-@keyframes truckDrive{ from{ transform:translateX(calc(100vw + 200px)); } to{ transform:translateX(-200px); } }
-@keyframes truckRoad{ from{ background-position:0 0; } to{ background-position:-32px 0; } }
-@media(max-width:768px){ .truck-run{ height:78px; } .truck-run-car{ width:116px; bottom:11px; } .truck-run-road{ bottom:18px; } }
-@media (prefers-reduced-motion: reduce){ .truck-run-car{ animation:none; left:auto; right:6vw; } .truck-run-road{ animation:none; } }
+/* 電気工事アニメーション（線画：プラグ接続＆スパーク） */
+.elec-anim{ position:relative; height:152px; background:var(--bg); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.elec-anim svg{ width:min(370px,88%); height:auto; color:var(--ink); }
+.el-plug{ animation:elPlug 4.6s ease-in-out infinite; }
+.el-spark{ stroke:var(--accent); opacity:0; animation:elSpark 4.6s ease-in-out infinite; }
+.el-glow{ stroke:var(--accent); opacity:0; transform-box:fill-box; transform-origin:center; animation:elGlow 4.6s ease-in-out infinite; }
+@keyframes elPlug{ 0%{transform:translateX(-56px);} 26%{transform:translateX(0);} 70%{transform:translateX(0);} 100%{transform:translateX(-56px);} }
+@keyframes elSpark{ 0%,30%{opacity:0;} 37%{opacity:1;} 45%{opacity:.2;} 53%{opacity:1;} 64%{opacity:0;} 100%{opacity:0;} }
+@keyframes elGlow{ 0%,28%{opacity:0;transform:scale(.4);} 38%{opacity:.55;transform:scale(1);} 56%{opacity:0;transform:scale(1.85);} 100%{opacity:0;transform:scale(1.85);} }
+@media(max-width:768px){ .elec-anim{ height:122px; } }
+@media (prefers-reduced-motion: reduce){ .el-plug,.el-spark,.el-glow{ animation:none; } .el-plug{ transform:translateX(0); } .el-spark,.el-glow{ opacity:0; } }
 </style>
 </body>
 </html>
