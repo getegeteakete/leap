@@ -525,5 +525,19 @@
   .str-card{ padding:22px 20px; }
 }
 </style>
+<style>
+/* スマホ: ヒーローのテキストを動画の上（ヘッダーとの間）に分離し、ふわっと表示。動画はその下で全面表示 */
+@media(max-width:768px){
+  .hero-slider{ display:flex; flex-direction:column; height:auto !important; }
+  .hero-overlay{ position:static !important; inset:auto !important; order:1; display:block !important;
+    background:linear-gradient(160deg,#0f1d36 0%,#17273f 100%) !important; padding:34px 22px 40px !important; }
+  .hero-content{ padding:0 !important; animation:heroFadeUp 1s cubic-bezier(.16,.84,.44,1) both; }
+  .hero-eyebrow{ margin-bottom:16px !important; }
+  .hero-title{ margin-bottom:16px !important; }
+  .hero-subtitle{ margin-bottom:26px !important; max-width:none !important; }
+  .hero-video-bg{ position:static !important; inset:auto !important; order:2; width:100% !important; height:auto !important; aspect-ratio:auto !important; }
+}
+@keyframes heroFadeUp{ 0%{opacity:0; transform:translateY(22px);} 100%{opacity:1; transform:translateY(0);} }
+</style>
 </body>
 </html>
