@@ -1141,3 +1141,18 @@ video.page-hero-bg{background:var(--ink);}
 .nav .mega-card-photo .mega-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
 .nav .mega-card-photo:hover .mega-thumb img{ transform:scale(1.06); }
 .nav .mega-card-photo .mega-txt{ padding:11px 13px 13px; gap:4px; }
+
+/* === 募集職種一覧（求人ページ上部） === */
+.job-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+.job-list-card{ display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; text-decoration:none; transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease; }
+.job-list-card:hover{ box-shadow:0 16px 36px rgba(26,31,46,.14); transform:translateY(-3px); border-color:var(--primary); }
+.job-list-card .jl-thumb{ display:block; width:100%; height:168px; overflow:hidden; }
+.job-list-card .jl-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
+.job-list-card:hover .jl-thumb img{ transform:scale(1.06); }
+.job-list-card .jl-body{ display:flex; flex-direction:column; gap:8px; padding:18px 20px 20px; font-family:'Noto Sans JP',sans-serif; }
+.job-list-card .jl-badge{ align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.14em; color:#fff; background:var(--primary); padding:4px 12px; border-radius:3px; }
+.job-list-card .jl-tt{ font-size:17px; font-weight:700; color:var(--ink); letter-spacing:.02em; }
+.job-list-card .jl-ds{ font-size:13px; color:var(--ink-2); line-height:1.8; }
+.job-list-card .jl-more{ margin-top:2px; font-size:13px; font-weight:700; color:var(--primary); letter-spacing:.04em; }
+.job-list-card:hover .jl-more{ color:var(--accent); }
+@media(max-width:700px){ .job-list{ grid-template-columns:1fr; } }
