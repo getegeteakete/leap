@@ -1131,3 +1131,12 @@ video.page-hero-bg{background:var(--ink);}
   .lightbox-prev{ left:6px; width:42px; height:42px; font-size:20px; }
   .lightbox-next{ right:6px; width:42px; height:42px; font-size:20px; }
 }
+
+/* === 会社案内メガメニュー：イメージ写真入り2列 === */
+.nav .mega-grid-photo{ display:grid; grid-template-columns:1fr 1fr; gap:10px; min-width:480px; }
+.nav .mega-card-photo{ flex-direction:column; align-items:stretch; gap:0; padding:0; overflow:hidden; border:1px solid var(--line); border-radius:12px; background:#fff; }
+.nav .mega-card-photo:hover{ background:#fff; border-color:var(--primary); box-shadow:0 10px 24px rgba(26,31,46,.12); }
+.nav .mega-card-photo .mega-thumb{ display:block; width:100%; height:104px; overflow:hidden; }
+.nav .mega-card-photo .mega-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
+.nav .mega-card-photo:hover .mega-thumb img{ transform:scale(1.06); }
+.nav .mega-card-photo .mega-txt{ padding:11px 13px 13px; gap:4px; }
