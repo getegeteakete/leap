@@ -157,6 +157,12 @@ a { color: inherit; }
 .office-name { font-weight: 600; color: var(--ink); margin-bottom: 12px; font-size: 15px; display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.05em; }
 .office-name .icon { color: var(--primary); }
 .office-details { font-size: 13px; color: var(--ink-2); line-height: 2; }
+a.office-link { display: block; text-decoration: none; transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease; }
+a.office-link:hover { box-shadow: 0 14px 32px rgba(26,31,46,.14); transform: translateY(-3px); border-left-color: var(--accent); }
+a.office-link img { transition: filter .3s ease; }
+a.office-link:hover img { filter: brightness(1.04) saturate(1.05); }
+.office-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--primary); letter-spacing: 0.04em; }
+a.office-link:hover .office-more { color: var(--accent); }
 
 /* Certifications */
 .certs { background: var(--bg); padding: 120px 24px; }
