@@ -213,3 +213,62 @@ document.querySelectorAll('.faq-q').forEach(function(q){
     divideBetween(Array.prototype.filter.call(c.children,function(e){return e.classList.contains('block');}));
   });
 })();
+
+/* === 写真クリックで拡大（ライトボックス・全ページ） === */
+(function(){
+  var sel = '.gallery-item img, .section-photo img, .photo-duo img, .rec-gallery figure img, .rec-point img';
+  var imgs = Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function(im){
+    return !im.closest('a');
+  });
+  if(!imgs.length) return;
+
+  var ov = document.createElement('div');
+  ov.className = 'lightbox';
+  ov.setAttribute('role','dialog');
+  ov.setAttribute('aria-modal','true');
+  ov.innerHTML =
+    '<button class="lightbox-btn lightbox-close" aria-label="閉じる">×</button>' +
+    '<button class="lightbox-btn lightbox-prev" aria-label="前の写真">‹</button>' +
+    '<img class="lightbox-img" alt="">' +
+    '<button class="lightbox-btn lightbox-next" aria-label="次の写真">›</button>' +
+    '<div class="lightbox-cap"></div>';
+  document.body.appendChild(ov);
+
+  var lbImg = ov.querySelector('.lightbox-img');
+  var lbCap = ov.querySelector('.lightbox-cap');
+  var idx = 0;
+
+  function capFor(im){
+    var f = im.closest('figure');
+    var c = f && f.querySelector('figcaption');
+    if(c && c.textContent.trim()) return c.textContent.trim();
+    var sp = im.closest('.section-photo');
+    var pc = sp && sp.querySelector('.photo-cap');
+    if(pc && pc.textContent.trim()) return pc.textContent.trim();
+    return im.getAttribute('alt') || '';
+  }
+  function show(i){
+    idx = (i + imgs.length) % imgs.length;
+    var im = imgs[idx];
+    lbImg.src = im.currentSrc || im.src;
+    lbImg.alt = im.alt || '';
+    lbCap.textContent = capFor(im);
+  }
+  function open(i){ show(i); ov.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function close(){ ov.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; }
+
+  imgs.forEach(function(im, i){
+    im.style.cursor = 'zoom-in';
+    im.addEventListener('click', function(){ open(i); });
+  });
+  ov.querySelector('.lightbox-close').addEventListener('click', close);
+  ov.querySelector('.lightbox-prev').addEventListener('click', function(e){ e.stopPropagation(); show(idx - 1); });
+  ov.querySelector('.lightbox-next').addEventListener('click', function(e){ e.stopPropagation(); show(idx + 1); });
+  ov.addEventListener('click', function(e){ if(e.target === ov) close(); });
+  document.addEventListener('keydown', function(e){
+    if(!ov.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    else if(e.key === 'ArrowLeft') show(idx - 1);
+    else if(e.key === 'ArrowRight') show(idx + 1);
+  });
+})();

@@ -1108,3 +1108,26 @@ video.page-hero-bg{background:var(--ink);}
   .side-banner-recruit .side-banner-sub{ font-size:8px; }
   .side-banner-recruit .side-banner-icon, .side-banner-recruit .side-banner-icon svg{ width:16px; height:16px; }
 }
+
+/* === 詳細リンク（料金・エリア等） === */
+.detail-link{ display:inline-flex; align-items:center; gap:8px; margin-top:20px; font-family:'Noto Sans JP',sans-serif; font-size:14px; font-weight:700; color:#fff; background:var(--primary); padding:12px 22px; border-radius:var(--r); text-decoration:none; letter-spacing:.04em; transition:background .2s ease, transform .2s ease, box-shadow .2s ease; }
+.detail-link span{ transition:transform .2s ease; }
+.detail-link:hover{ background:var(--accent); transform:translateY(-2px); box-shadow:0 10px 22px rgba(224,133,31,.28); }
+.detail-link:hover span{ transform:translateX(4px); }
+
+/* === ライトボックス（写真クリックで拡大） === */
+.lightbox{ position:fixed; inset:0; z-index:2000; display:none; align-items:center; justify-content:center; background:rgba(12,18,32,.93); padding:48px; }
+.lightbox.open{ display:flex; }
+.lightbox-img{ max-width:92vw; max-height:84vh; width:auto; height:auto; object-fit:contain; border-radius:6px; box-shadow:0 24px 70px rgba(0,0,0,.55); }
+.lightbox-cap{ position:absolute; bottom:20px; left:0; right:0; text-align:center; color:#fff; font-family:'Noto Sans JP',sans-serif; font-size:14px; letter-spacing:.05em; padding:0 24px; text-shadow:0 1px 6px rgba(0,0,0,.6); }
+.lightbox-btn{ position:absolute; background:rgba(255,255,255,.12); color:#fff; border:none; cursor:pointer; width:50px; height:50px; border-radius:50%; font-size:26px; line-height:1; display:flex; align-items:center; justify-content:center; transition:background .2s ease; -webkit-tap-highlight-color:transparent; }
+.lightbox-btn:hover{ background:rgba(255,255,255,.3); }
+.lightbox-close{ top:24px; right:24px; }
+.lightbox-prev{ left:24px; top:50%; transform:translateY(-50%); }
+.lightbox-next{ right:24px; top:50%; transform:translateY(-50%); }
+@media(max-width:860px){
+  .lightbox{ padding:16px; }
+  .lightbox-close{ top:12px; right:12px; width:42px; height:42px; font-size:22px; }
+  .lightbox-prev{ left:6px; width:42px; height:42px; font-size:20px; }
+  .lightbox-next{ right:6px; width:42px; height:42px; font-size:20px; }
+}
