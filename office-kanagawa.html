@@ -178,6 +178,17 @@
       <figure class="gallery-item"><span class="gal-tag">車輌</span><img src="/assets/real-kanagawa-cab.jpg" alt="車体（夕景）" loading="lazy"><figcaption>車体（夕景）</figcaption></figure>
       <figure class="gallery-item"><span class="gal-tag">ロゴ</span><img src="/assets/real-kanagawa-logo.jpg" alt="車体ロゴ" loading="lazy"><figcaption>車体ロゴ</figcaption></figure>
     </div>
+    <div class="block-head" style="margin-top:8px"><span class="eyebrow">VEHICLE TYPES</span><h3 style="font-size:22px;font-weight:700">神奈川営業所で活躍する車種</h3><p>関東圏の配送に最適な2t・4t車を配備。すべてカーナビ・デジタコ・バックカメラ付き、AT車もあります。</p></div>
+    <div class="veh-grid">
+      <figure class="veh-card">
+        <img src="/assets/real-veh-2t-long-1.jpg" alt="2t標準ロング アルミバン" loading="lazy">
+        <figcaption><b>2t 標準ロング</b><span>主力の雑貨配送車（6台）</span></figcaption>
+      </figure>
+      <figure class="veh-card">
+        <img src="/assets/real-veh-4t-wing-gate-1.jpg" alt="4t フルワイドウイング 格納ゲート" loading="lazy">
+        <figcaption><b>4t フルワイドウィング ゲート</b><span>大容量・格納ゲート付き（6台）</span></figcaption>
+      </figure>
+    </div>
     <h3 style="font-size:17px;font-weight:700;margin:28px 0 14px;letter-spacing:0.04em;">神奈川営業所の保有台数</h3>
     <table class="spec-table">
       <tr><th>2t箱標準ロング</th><td>6台</td></tr>
@@ -289,5 +300,14 @@
   </div>
 </div>
 <script src="/assets/app.js?v=14"></script>
+<style>
+.veh-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:18px 0 8px; }
+.veh-card{ margin:0; border-radius:12px; overflow:hidden; background:#fff; border:1px solid var(--line); box-shadow:0 4px 14px rgba(7,18,38,.07); display:flex; flex-direction:column; }
+.veh-card img{ display:block; width:100%; height:200px; object-fit:cover; }
+.veh-card figcaption{ padding:14px 16px 16px; }
+.veh-card figcaption b{ display:block; font-size:15px; font-weight:700; color:var(--ink); line-height:1.45; }
+.veh-card figcaption span{ display:block; font-size:12px; color:var(--ink-2); margin-top:5px; }
+@media(max-width:600px){ .veh-grid{ grid-template-columns:1fr; } .veh-card img{ height:180px; } }
+</style>
 </body>
 </html>
