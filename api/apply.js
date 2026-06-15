@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   const FROM = process.env.APPLY_FROM_EMAIL || 'recruit@leap-transport.com';
-  const TO_COMMON = process.env.APPLY_TO_EMAIL || '';
+  const TO_COMMON = process.env.APPLY_TO_EMAIL || 'leap@live.jp';
   const TO_HONSHA = process.env.APPLY_TO_HONSHA || TO_COMMON;
   const TO_KANAGAWA = process.env.APPLY_TO_KANAGAWA || TO_COMMON;
   const TO_IBARAKI = process.env.APPLY_TO_IBARAKI || TO_COMMON;

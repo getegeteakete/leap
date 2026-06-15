@@ -141,45 +141,45 @@
       <p>以下のお問い合わせフォームから、お気軽にご相談ください。貴社のお役に立てることを、社員一同心より願っております。<br>お電話でのお問い合わせは <a href="tel:0487963296" style="color:var(--primary);font-weight:700;">048-796-3296</a>（受付時間 8:30〜18:00）まで。</p>
     </div>
 
-    <form class="cform" id="contactForm" onsubmit="return false;">
+    <form class="cform" id="contactForm" onsubmit="return submitContact(event)">
       <div class="block-head" style="margin-top:24px;"><h2 style="font-size:20px;">基本情報</h2></div>
       <div class="field"><label>お問い合わせ内容<span class="req">必須</span></label>
-        <select required><option value="">お選びください</option><option>一般貨物</option><option>家電設置</option><option>求人</option><option>その他</option></select></div>
+        <select name="category" required><option value="">お選びください</option><option>一般貨物</option><option>家電設置</option><option>求人</option><option>その他</option></select></div>
       <div class="row2">
-        <div class="field"><label>貴社名（お客様名）<span class="req">必須</span></label><input type="text" required></div>
-        <div class="field"><label>フリガナ<span class="req">必須</span></label><input type="text" required></div>
+        <div class="field"><label>貴社名（お客様名）<span class="req">必須</span></label><input name="company" type="text" required></div>
+        <div class="field"><label>フリガナ<span class="req">必須</span></label><input name="companyKana" type="text" required></div>
       </div>
       <div class="row2">
-        <div class="field"><label>ご担当者名<span class="req">必須</span></label><input type="text" required></div>
-        <div class="field"><label>ご担当者名フリガナ<span class="req">必須</span></label><input type="text" required></div>
+        <div class="field"><label>ご担当者名<span class="req">必須</span></label><input name="contactName" type="text" required></div>
+        <div class="field"><label>ご担当者名フリガナ<span class="req">必須</span></label><input name="contactKana" type="text" required></div>
       </div>
       <div class="row2">
-        <div class="field"><label>メールアドレス<span class="req">必須</span></label><input type="email" required></div>
-        <div class="field"><label>ご連絡先の電話番号<span class="req">必須</span></label><input type="tel" required></div>
+        <div class="field"><label>メールアドレス<span class="req">必須</span></label><input name="email" type="email" required></div>
+        <div class="field"><label>ご連絡先の電話番号<span class="req">必須</span></label><input name="tel" type="tel" required></div>
       </div>
-      <div class="field"><label>FAX<span class="opt">任意</span></label><input type="tel"></div>
+      <div class="field"><label>FAX<span class="opt">任意</span></label><input name="fax" type="tel"></div>
 
       <div class="block-head" style="margin-top:24px;"><h2 style="font-size:20px;">配送に関するご入力（任意）</h2></div>
       <div class="row2">
-        <div class="field"><label>積込地 都道府県<span class="opt">任意</span></label><select><option value="">お選びください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></div>
-        <div class="field"><label>納入先 都道府県<span class="opt">任意</span></label><select><option value="">お選びください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></div>
+        <div class="field"><label>積込地 都道府県<span class="opt">任意</span></label><select name="fromPref"><option value="">お選びください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></div>
+        <div class="field"><label>納入先 都道府県<span class="opt">任意</span></label><select name="toPref"><option value="">お選びください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></div>
       </div>
-      <div class="field"><label>積込地・納入先 ご住所（できるだけ詳しく）<span class="opt">任意</span></label><textarea rows="2"></textarea></div>
+      <div class="field"><label>積込地・納入先 ご住所（できるだけ詳しく）<span class="opt">任意</span></label><textarea name="address" rows="2"></textarea></div>
       <div class="row2">
-        <div class="field"><label>納入指定時間<span class="opt">任意</span></label><select><option>選択してください</option><option>時間指定なし</option><option>時間指定あり</option></select></div>
-        <div class="field"><label>トラック トン数<span class="opt">任意</span></label><select><option>お選びください</option><option>1トン車</option><option>2トン車</option><option>4トン車</option><option>10トン車</option><option>トレーラー</option></select></div>
+        <div class="field"><label>納入指定時間<span class="opt">任意</span></label><select name="deliveryTime"><option>選択してください</option><option>時間指定なし</option><option>時間指定あり</option></select></div>
+        <div class="field"><label>トラック トン数<span class="opt">任意</span></label><select name="truckTon"><option>お選びください</option><option>1トン車</option><option>2トン車</option><option>4トン車</option><option>10トン車</option><option>トレーラー</option></select></div>
       </div>
       <div class="row2">
-        <div class="field"><label>ボディ種類<span class="opt">任意</span></label><select><option>お選びください</option><option>平ボディ</option><option>箱ボディ</option><option>ウィングボディ</option><option>ユニック</option></select></div>
-        <div class="field"><label>荷姿<span class="opt">任意</span></label><select><option>お選びください</option><option>ケース物</option><option>バラ物</option><option>パレット物</option><option>単体物</option><option>機械物</option></select></div>
+        <div class="field"><label>ボディ種類<span class="opt">任意</span></label><select name="bodyType"><option>お選びください</option><option>平ボディ</option><option>箱ボディ</option><option>ウィングボディ</option><option>ユニック</option></select></div>
+        <div class="field"><label>荷姿<span class="opt">任意</span></label><select name="cargo"><option>お選びください</option><option>ケース物</option><option>バラ物</option><option>パレット物</option><option>単体物</option><option>機械物</option></select></div>
       </div>
-      <div class="field"><label>パレット積の可・不可<span class="opt">任意</span></label><select><option>お選びください</option><option>パレット積可能</option><option>パレット積不可能</option></select></div>
+      <div class="field"><label>パレット積の可・不可<span class="opt">任意</span></label><select name="pallet"><option>お選びください</option><option>パレット積可能</option><option>パレット積不可能</option></select></div>
 
-      <div class="field"><label>その他、お問い合わせ・特に伝えておきたい内容<span class="opt">任意</span></label><textarea rows="5"></textarea></div>
+      <div class="field"><label>その他、お問い合わせ・特に伝えておきたい内容<span class="opt">任意</span></label><textarea name="message" rows="5"></textarea></div>
 
       <p class="privacy-note">ご入力いただいた個人情報は、頂いたお問い合わせにお応えするためだけに利用し、個人情報保護方針に従って適正に管理いたします。また、ご本人の承諾を得た場合や法令等により正当な理由がある場合を除き、第三者に提供または開示いたしません。</p>
-      <button type="submit" class="submit" onclick="document.getElementById('formMsg').style.display='block';this.disabled=true;">この内容で送信する</button>
-      <p id="formMsg" style="display:none;font-family:'Noto Sans JP',sans-serif;color:var(--primary);font-weight:600;text-align:center;">送信ありがとうございます。担当者より折り返しご連絡いたします。（※デモ環境のため実際には送信されません）</p>
+      <button type="submit" class="submit" id="submitBtn">この内容で送信する</button>
+      <p id="formMsg" style="display:none;font-family:'Noto Sans JP',sans-serif;font-weight:600;text-align:center;margin-top:14px;"></p>
     </form>
   </div>
 </div>
@@ -257,5 +257,33 @@
   </div>
 </div>
 <script src="/assets/app.js?v=15"></script>
+<script>
+async function submitContact(e){
+  e.preventDefault();
+  var form = document.getElementById('contactForm');
+  var btn = document.getElementById('submitBtn');
+  var msg = document.getElementById('formMsg');
+  var data = {};
+  form.querySelectorAll('input,select,textarea').forEach(function(el){ if(el.name) data[el.name]=el.value; });
+  btn.disabled = true; btn.textContent = '送信中…';
+  msg.style.display='block'; msg.style.color='var(--ink-2)'; msg.textContent='送信しています…';
+  try{
+    var res = await fetch('/api/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+    var j = await res.json().catch(function(){return{};});
+    if(res.ok){
+      form.querySelectorAll('input,select,textarea').forEach(function(el){ el.value=''; });
+      msg.style.color='var(--primary)'; msg.textContent='送信ありがとうございます。担当者より折り返しご連絡いたします。';
+      btn.textContent='送信しました';
+    }else{
+      msg.style.color='#c0392b'; msg.textContent=(j&&j.error)?j.error:'送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。';
+      btn.disabled=false; btn.textContent='この内容で送信する';
+    }
+  }catch(err){
+    msg.style.color='#c0392b'; msg.textContent='送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。';
+    btn.disabled=false; btn.textContent='この内容で送信する';
+  }
+  return false;
+}
+</script>
 </body>
 </html>
