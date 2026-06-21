@@ -127,7 +127,7 @@
   </div>
   <div class="mobile-menu-info">営業時間：平日 8:30〜18:00<br>埼玉県春日部市上柳77</div>
 </aside>
-<section class="page-hero">
+<section class="page-hero page-hero-bright">
   <img class="page-hero-bg" src="/assets/real-hq-building.jpg" alt="株式会社リープ 本社・春日部営業所">
   <div class="page-hero-inner">
     <span class="eyebrow">HEADQUARTERS</span>
@@ -378,6 +378,12 @@
 button.gallery-item{ display:block; width:auto; padding:0; border:none; background:none; font:inherit; cursor:pointer; text-align:left; }
 .gallery-item .gal-more{ position:absolute; right:10px; top:10px; display:inline-flex; align-items:center; gap:6px; background:rgba(7,18,38,.82); color:#fff; font-size:12px; font-weight:600; padding:6px 11px; border-radius:8px; z-index:2; pointer-events:none; }
 .gallery-item .gal-more svg{ width:14px; height:14px; }
+/* 会社案内関連：ヒーローを明るく＆テキストを見やすく */
+.page-hero-bright::after{ background:linear-gradient(100deg, rgba(15,23,42,.50) 0%, rgba(15,23,42,.24) 48%, rgba(15,23,42,.06) 100%) !important; }
+.page-hero-bright .page-hero-bg{ filter:brightness(1.16) saturate(1.08) contrast(1.02) !important; }
+.page-hero-bright .eyebrow{ text-shadow:0 2px 10px rgba(0,0,0,.6); }
+.page-hero-bright h1{ text-shadow:0 3px 18px rgba(0,0,0,.72), 0 1px 4px rgba(0,0,0,.55); }
+.page-hero-bright p.sub{ color:#fff !important; text-shadow:0 2px 12px rgba(0,0,0,.7), 0 1px 4px rgba(0,0,0,.5); }
 </style>
 <div class="veh-lightbox" id="vehLightbox" onclick="if(event.target===this)closeVehLightbox()">
   <div class="veh-lb-stage">
