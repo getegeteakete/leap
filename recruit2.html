@@ -134,7 +134,7 @@
     <h1>あなたの技術を、<br>そのまま収入に。</h1>
     <p class="sub">電気工事士を業務委託で募集。完全出来高制で年商2,500万円も可能。専属も掛持ちもOK、休日も基本自由です。</p>
     <div class="rec-hero-actions">
-      <a href="/contact.html" class="btn-primary btn-shine">今すぐ応募する <span class="icon icon-16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+      <a href="#apply" class="btn-primary btn-shine">今すぐ応募する <span class="icon icon-16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
       <a href="#jobs" class="btn-ghost">募集要項を見る</a>
     </div>
   </div>
@@ -285,12 +285,35 @@
     </div>
   </div>
 
+  <div class="block" id="apply">
+    <div class="rec-head"><span class="eyebrow">ENTRY</span><h2>応募フォーム</h2><p>電気工事士（業務委託パートナー）へのご応募は、下記フォームから受け付けております。お電話でも承ります（本社 048-796-3296／神奈川 042-401-4098／茨城 029-896-9700）。</p></div>
+    <form class="apply-form" id="applyForm" onsubmit="submitApply(event)">
+      <input type="hidden" name="office" value="">
+      <div class="ap-grid">
+        <div class="ap-field ap-full">
+          <label>応募職種 <span class="ap-req">必須</span></label>
+          <input type="text" id="ap-position" name="position" required value="電気工事士（業務委託パートナー）">
+        </div>
+        <div class="ap-field"><label>お名前 <span class="ap-req">必須</span></label><input type="text" name="name" required></div>
+        <div class="ap-field"><label>フリガナ <span class="ap-req">必須</span></label><input type="text" name="kana" required></div>
+        <div class="ap-field"><label>電話番号 <span class="ap-req">必須</span></label><input type="tel" name="tel" required placeholder="090-1234-5678"></div>
+        <div class="ap-field"><label>メールアドレス <span class="ap-req">必須</span></label><input type="email" name="email" required placeholder="example@email.com"></div>
+        <div class="ap-field"><label>年齢 <span class="ap-opt">任意</span></label><input type="text" name="age" placeholder="例：38歳"></div>
+        <div class="ap-field"><label>保有資格・稼働希望エリア <span class="ap-opt">任意</span></label><input type="text" name="pref" placeholder="例：第二種電気工事士／さいたま市周辺"></div>
+        <div class="ap-field ap-full"><label>ご経験・志望動機・ご質問など <span class="ap-opt">任意</span></label><textarea name="message" rows="5" placeholder="ご経験年数、保有資格、稼働可能日数、ご質問などがあればご記入ください"></textarea></div>
+      </div>
+      <label class="ap-consent"><input type="checkbox" required>個人情報を採用選考の目的にのみ利用することに同意します</label>
+      <button type="submit" class="ap-submit" id="apSubmit">この内容で応募する</button>
+      <p class="ap-msg" id="apMsg"></p>
+    </form>
+  </div>
+
 </div>
 
 <section class="rec-entry">
   <h2>まずは、条件だけでも聞いてみませんか。</h2>
   <p>「どのくらい稼げる？」「掛持ちでもいい？」そんなご相談だけでも大歓迎です。WEBまたはお電話で、お気軽にお問い合わせください。</p>
-  <a href="/contact.html" class="btn-white">応募・お問い合わせはこちら <span class="icon icon-16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+  <a href="#apply" class="btn-white">応募フォームへ <span class="icon icon-16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
 </section>
 
 <footer class="footer">
@@ -379,6 +402,61 @@
 @keyframes elGlow{ 0%,28%{opacity:0;transform:scale(.4);} 38%{opacity:.55;transform:scale(1);} 56%{opacity:0;transform:scale(1.85);} 100%{opacity:0;transform:scale(1.85);} }
 @media(max-width:768px){ .elec-anim{ height:122px; } }
 @media (prefers-reduced-motion: reduce){ .el-plug,.el-spark,.el-glow{ animation:none; } .el-plug{ transform:translateX(0); } .el-spark,.el-glow{ opacity:0; } }
+/* 応募フォーム */
+.apply-form{ max-width:760px; margin:8px auto 0; }
+.ap-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 18px; }
+.ap-field{ display:flex; flex-direction:column; gap:6px; }
+.ap-field.ap-full{ grid-column:1 / -1; }
+.ap-field label{ font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:600; color:var(--ink); }
+.ap-req{ font-size:10px; color:#fff; background:var(--accent); padding:1px 7px; border-radius:4px; margin-left:4px; vertical-align:middle; }
+.ap-opt{ font-size:10px; color:var(--ink-2); background:var(--bg-2); padding:1px 7px; border-radius:4px; margin-left:4px; vertical-align:middle; }
+.ap-field input, .ap-field textarea{ font-family:'Noto Sans JP',sans-serif; font-size:14px; padding:11px 13px; border:1px solid var(--line); border-radius:9px; background:#fff; color:var(--ink); width:100%; box-sizing:border-box; transition:border-color .2s, box-shadow .2s; }
+.ap-field input:focus, .ap-field textarea:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(200,83,31,.12); }
+.ap-field input[readonly]{ background:#fbfaf8; font-weight:600; color:var(--accent); }
+.ap-field textarea{ resize:vertical; }
+.ap-consent{ display:flex; align-items:center; gap:9px; font-family:'Noto Sans JP',sans-serif; font-size:13px; color:var(--ink-2); margin:20px 0 18px; }
+.ap-consent input{ width:17px; height:17px; accent-color:var(--accent); flex:0 0 auto; }
+.ap-submit{ display:block; width:100%; font-family:'Noto Sans JP',sans-serif; font-size:16px; font-weight:700; color:#fff; background:var(--accent); border:none; border-radius:10px; padding:16px; cursor:pointer; transition:background .2s, transform .1s; }
+.ap-submit:hover{ background:#a8461a; }
+.ap-submit:active{ transform:translateY(1px); }
+.ap-submit:disabled{ opacity:.6; cursor:default; }
+.ap-msg{ font-family:'Noto Sans JP',sans-serif; font-size:14px; font-weight:600; text-align:center; margin:16px 0 0; line-height:1.7; }
+@media(max-width:680px){ .ap-grid{ grid-template-columns:1fr; } }
 </style>
+<script>
+async function submitApply(e){
+  e.preventDefault();
+  var form = e.target;
+  var btn = document.getElementById('apSubmit');
+  var msg = document.getElementById('apMsg');
+  var tel = '本社 048-796-3296／神奈川 042-401-4098／茨城 029-896-9700';
+  var data = {};
+  new FormData(form).forEach(function(v,k){ data[k] = v; });
+  btn.disabled = true; btn.textContent = '送信中…';
+  msg.textContent = '';
+  try{
+    var r = await fetch('/api/apply', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+    if(r.ok){
+      msg.style.color = 'var(--accent)';
+      msg.textContent = 'ご応募ありがとうございます。担当者より折り返しご連絡いたします。';
+      form.reset();
+      btn.textContent = '送信完了';
+    }else{
+      var j = await r.json().catch(function(){ return {}; });
+      msg.style.color = '#c0392b';
+      msg.innerHTML = (j.error || '送信に失敗しました') + '<br>お手数ですがお電話でも承ります：<br>' + tel;
+      btn.disabled = false; btn.textContent = 'この内容で応募する';
+    }
+  }catch(err){
+    msg.style.color = '#c0392b';
+    msg.innerHTML = '送信に失敗しました。お手数ですがお電話でも承ります：<br>' + tel;
+    btn.disabled = false; btn.textContent = 'この内容で応募する';
+  }
+}
+</script>
 </body>
 </html>
