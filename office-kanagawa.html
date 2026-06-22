@@ -21,7 +21,7 @@
 <meta name="twitter:image" content="https://leap-red.vercel.app/assets/real-kanagawa-exterior.jpg?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=21">
+<link rel="stylesheet" href="/assets/style.css?v=22">
 
 </head>
 <body>
@@ -322,7 +322,7 @@
     <button class="chat-send" id="chatSend" onclick="sendMessage()"><span class="icon icon-16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>送信</button>
   </div>
 </div>
-<script src="/assets/app.js?v=16"></script>
+<script src="/assets/app.js?v=17"></script>
 <style>
 .veh-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:18px 0 8px; }
 .veh-card{ margin:0; border-radius:12px; overflow:hidden; background:#fff; border:1px solid var(--line); box-shadow:0 4px 14px rgba(7,18,38,.07); display:flex; flex-direction:column; }
@@ -332,7 +332,7 @@
 .veh-card figcaption span{ display:block; font-size:12px; color:var(--ink-2); margin-top:5px; }
 @media(max-width:600px){ .veh-grid{ grid-template-columns:1fr; } .veh-card img{ height:180px; } }
 /* 車種ショーケース */
-.veh-showcase-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:22px; margin:20px 0 8px; }
+.veh-showcase-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr)); gap:22px; margin:20px 0 8px; }
 .veh-show{ background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 4px 18px rgba(7,18,38,.08); display:flex; flex-direction:column; }
 .veh-show-photo{ position:relative; display:block; width:100%; padding:0; border:none; background:none; cursor:pointer; overflow:hidden; }
 .veh-show-photo img{ display:block; width:100%; height:280px; object-fit:cover; transition:transform .4s; }

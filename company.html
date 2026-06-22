@@ -21,7 +21,7 @@
 <meta name="twitter:image" content="https://leap-red.vercel.app/assets/real-hq-trucks-sign.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=21">
+<link rel="stylesheet" href="/assets/style.css?v=22">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"株式会社リープ","alternateName":"Leap Co., Ltd.","url":"https://leap-red.vercel.app/","logo":"https://leap-red.vercel.app/assets/asset01.png","image":"https://leap-red.vercel.app/assets/real-fleet-hq-lineup.jpg","description":"運ぶ信頼、届ける真心。一般貨物・取扱、家電配送・設置工事、一時保管・3PLを提供する物流会社。","slogan":"運ぶ信頼、届ける真心。","foundingDate":"2007","telephone":"+81-48-796-3296","faxNumber":"+81-48-796-3298","email":"","address":{"@type":"PostalAddress","postalCode":"344-0121","addressRegion":"埼玉県","addressLocality":"春日部市","streetAddress":"上柳77","addressCountry":"JP"},"areaServed":"関東","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:30","closes":"18:00"}}
@@ -460,7 +460,7 @@
     <button class="chat-send" id="chatSend" onclick="sendMessage()"><span class="icon icon-16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>送信</button>
   </div>
 </div>
-<script src="/assets/app.js?v=16"></script>
+<script src="/assets/app.js?v=17"></script>
 <style>
 .office-gallery{ margin-top:6px; }
 .office-card{ overflow:hidden; }
@@ -485,7 +485,7 @@ a.office-card-link:hover .office-more{ color:var(--accent); }
 @media(max-width:900px){ .veh-grid{ grid-template-columns:repeat(2,1fr); } }
 @media(max-width:480px){ .veh-grid{ grid-template-columns:1fr 1fr; gap:10px; } .veh-card img{ height:120px; } .veh-card figcaption b{ font-size:12.5px; } }
 /* 車種ショーケース */
-.veh-showcase-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:22px; margin:20px 0 8px; }
+.veh-showcase-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr)); gap:22px; margin:20px 0 8px; }
 .veh-show{ background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 4px 18px rgba(7,18,38,.08); display:flex; flex-direction:column; }
 .veh-show-photo{ position:relative; display:block; width:100%; padding:0; border:none; background:none; cursor:pointer; overflow:hidden; }
 .veh-show-photo img{ display:block; width:100%; height:280px; object-fit:cover; transition:transform .4s; }

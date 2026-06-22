@@ -96,7 +96,7 @@ window.addEventListener('scroll', () => {
 // Chat
 const CHAT_MODE = /recruit/i.test(location.pathname) ? 'recruit' : 'company';
 const chatMessages = []; // Messages API 用の履歴（user 始まり）。挨拶はHTMLの静的バブルなので含めない。
-function toggleChat() { document.getElementById('chatPanel').classList.toggle('open'); }
+function toggleChat() { var open = document.getElementById('chatPanel').classList.toggle('open'); document.body.classList.toggle('chat-open', open); }
 
 // 求人ページ（recruit / recruit2）ではチャットの挨拶・ヘッダーを採用向けに差し替え
 (function initChatPersona(){

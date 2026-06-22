@@ -299,7 +299,7 @@ a.office-link:hover .office-more { color: var(--accent); }
 @keyframes typing { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
 
 /* ハンバーガーメニュー */
-.menu-btn { display: none; background: none; border: none; padding: 8px; cursor: pointer; color: var(--ink); z-index: 110; }
+.menu-btn { display: none; background: none; border: none; padding: 10px; cursor: pointer; color: var(--ink); z-index: 110; }
 .menu-btn svg { width: 28px; height: 28px; }
 .mobile-menu { position: fixed; top: 0; right: -100%; width: 100%; max-width: 360px; height: 100vh; background: #fff; z-index: 105; transition: right 0.3s ease; box-shadow: -8px 0 32px rgba(0,0,0,0.15); display: flex; flex-direction: column; }
 .mobile-menu.open { right: 0; }
@@ -615,7 +615,7 @@ body.menu-open { overflow: hidden; }
 .spec-table th, .spec-table td { text-align: left; padding: 18px 20px; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.9; vertical-align: top; }
 .spec-table th { width: 30%; background: var(--bg-2); font-weight: 600; color: var(--ink); }
 .spec-table td { color: var(--ink-2); }
-@media (max-width: 640px){ .spec-table th, .spec-table td { display: block; width: 100%; } .spec-table th { border-bottom: none; } }
+@media (max-width: 768px){ .spec-table th, .spec-table td { display: block; width: 100%; } .spec-table th { border-bottom: none; padding-bottom: 4px; } .spec-table td { padding-top: 4px; } }
 
 /* --- Office / location cards --- */
 .office-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
@@ -1227,9 +1227,29 @@ video.page-hero-bg{background:var(--ink);}
 @media(max-width:560px){ .human-anim{ height:120px; } .ha-figure{ width:98px; height:120px; } }
 
 /* ===== Botマークの吹き出し（採用ページ） ===== */
-.fab-bubble{ position:absolute; right:86px; bottom:14px; background:#fff; color:var(--ink); font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:13.5px; white-space:nowrap; padding:9px 15px; border-radius:18px; border:1px solid var(--line); box-shadow:0 8px 22px rgba(0,0,0,.16); animation:fabBubbleFloat 2.6s ease-in-out infinite; }
+.fab-bubble{ position:absolute; right:100%; left:auto; margin-right:14px; bottom:14px; pointer-events:none; background:#fff; color:var(--ink); font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:13.5px; white-space:nowrap; padding:9px 15px; border-radius:18px; border:1px solid var(--line); box-shadow:0 8px 22px rgba(0,0,0,.16); animation:fabBubbleFloat 2.6s ease-in-out infinite; }
 .fab-bubble::before{ content:""; position:absolute; right:-10px; bottom:12px; width:0; height:0; border-top:9px solid transparent; border-bottom:9px solid transparent; border-left:10px solid var(--line); }
 .fab-bubble::after{ content:""; position:absolute; right:-8px; bottom:13px; width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:9px solid #fff; }
 @keyframes fabBubbleFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-5px);} }
 body:has(#chatPanel.open) .fab-bubble{ opacity:0; visibility:hidden; }
-@media(max-width:560px){ .fab-bubble{ right:74px; bottom:18px; font-size:12.5px; padding:8px 12px; } }
+body.chat-open .fab-bubble{ opacity:0; visibility:hidden; } /* :has()非対応端末向けフォールバック */
+@media(max-width:560px){ .fab-bubble{ margin-right:12px; bottom:18px; font-size:12.5px; padding:8px 12px; } }
+
+/* ===== レスポンシブ監査の追補修正（スマホ最適化） ===== */
+@media (max-width: 768px){
+  /* iOS Safari のフォーカス時自動ズーム防止：フォーム入力は16px以上 */
+  .cform input, .cform select, .cform textarea,
+  .ap-field input, .ap-field select, .ap-field textarea { font-size: 16px !important; }
+  /* 価格表（3列）のカード化で中央「詳細」列にも見出しを付与（.price列は除外） */
+  .price-table td:nth-child(2):not(.price)::before { content:"内容　"; color:var(--ink-3); font-weight:500; font-size:12px; }
+}
+@media (max-width: 560px){
+  /* 募集要項テーブルをスマホで縦積みに */
+  .job-spec th, .job-spec td { display: block; width: 100%; }
+  .job-spec th { border-bottom: none; padding-bottom: 2px; }
+  .job-spec td { padding-top: 2px; }
+}
+@media (max-width: 400px){
+  /* 車種スペックの寸法値が窮屈な極小幅では折返し可に */
+  .veh-show-spec div { flex-wrap: wrap; }
+}
