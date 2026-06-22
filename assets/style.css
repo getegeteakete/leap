@@ -1159,3 +1159,26 @@ video.page-hero-bg{background:var(--ink);}
 .job-list-card .jl-more{ margin-top:2px; font-size:13px; font-weight:700; color:var(--primary); letter-spacing:.04em; }
 .job-list-card:hover .jl-more{ color:var(--accent); }
 @media(max-width:700px){ .job-list{ grid-template-columns:1fr; } }
+
+/* ===== 共有ライトボックス（全ページ） ===== */
+.veh-lightbox{ position:fixed; inset:0; background:rgba(7,12,24,.92); z-index:9999; display:none; align-items:center; justify-content:center; }
+.veh-lightbox.open{ display:flex; }
+.veh-lb-stage{ position:relative; max-width:92vw; max-height:88vh; text-align:center; }
+.veh-lb-img{ max-width:92vw; max-height:78vh; border-radius:10px; box-shadow:0 10px 50px rgba(0,0,0,.5); }
+.veh-lb-title{ display:block; color:#fff; font-size:16px; font-weight:700; margin-bottom:14px; }
+.veh-lb-counter{ display:block; color:rgba(255,255,255,.7); font-size:13px; margin-top:12px; }
+.veh-lb-close{ position:absolute; top:-44px; right:0; width:40px; height:40px; border:none; background:rgba(255,255,255,.15); color:#fff; font-size:24px; border-radius:50%; cursor:pointer; line-height:1; }
+.veh-lb-nav{ position:absolute; top:44%; transform:translateY(-50%); width:48px; height:48px; border:none; background:rgba(255,255,255,.15); color:#fff; font-size:30px; border-radius:50%; cursor:pointer; line-height:1; display:flex; align-items:center; justify-content:center; }
+.veh-lb-nav:hover{ background:rgba(255,255,255,.3); }
+.veh-lb-prev{ left:-66px; }
+.veh-lb-next{ right:-66px; }
+@media(max-width:768px){ .veh-lb-prev{ left:6px; } .veh-lb-next{ right:6px; } }
+/* 素のfigureギャラリーをクリック可能に見せる（虫眼鏡ヒント） */
+.appliance-gallery figure, .rec-gallery figure, figure.gallery-item{ cursor:pointer; position:relative; }
+.appliance-gallery figure::after, .rec-gallery figure::after, figure.gallery-item::after{
+  content:""; position:absolute; right:10px; top:10px; width:32px; height:32px; border-radius:9px;
+  background:rgba(7,18,38,.78) no-repeat center/17px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'><circle cx='11' cy='11' r='7'/><line x1='21' y1='21' x2='16.65' y2='16.65'/><line x1='11' y1='8' x2='11' y2='14'/><line x1='8' y1='11' x2='14' y2='11'/></svg>");
+  opacity:0; transform:translateY(-4px); transition:opacity .25s, transform .25s; pointer-events:none; z-index:3;
+}
+.appliance-gallery figure:hover::after, .rec-gallery figure:hover::after, figure.gallery-item:hover::after{ opacity:1; transform:translateY(0); }
