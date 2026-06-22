@@ -1197,3 +1197,44 @@ video.page-hero-bg{background:var(--ink);}
 .ff-card .ff-ds{ display:block; color:rgba(255,255,255,.86); font-size:12px; margin-top:6px; padding-left:12px; line-height:1.5; }
 @media(max-width:860px){ .footer-feature{ grid-template-columns:1fr 1fr; gap:12px; } }
 @media(max-width:480px){ .footer-feature{ grid-template-columns:1fr; } .ff-card{ min-height:120px; } }
+
+/* ===== 求人「働き方」カードの人型アニメーション ===== */
+.rec-style{ overflow:hidden; }
+.rec-style .rs-tag, .rec-style h3, .rec-style p, .rec-style ul{ position:relative; z-index:1; }
+.human-anim{ position:absolute; top:14px; left:0; right:0; height:158px; display:flex; align-items:flex-start; justify-content:center; pointer-events:none; z-index:0; }
+.ha-figure{ width:122px; height:150px; overflow:visible; filter:drop-shadow(0 10px 16px rgba(0,0,0,.28)); }
+.ha-figure *{ transform-box:fill-box; }
+.ha-head, .ha-torso, .ha-limb{ fill:#fff; }
+.ha-arm, .ha-leg{ transform-origin:center top; }
+.ha-arm-back, .ha-leg-back{ opacity:.5; }
+.ha-body{ transform-origin:center bottom; }
+
+/* TYPE A — GO!（走る） */
+.ha-go .ha-body{ animation:haBob .54s ease-in-out infinite; }
+.ha-go .ha-leg-front,.ha-go .ha-arm-back{ animation:haSwingA .54s ease-in-out infinite; }
+.ha-go .ha-leg-back,.ha-go .ha-arm-front{ animation:haSwingB .54s ease-in-out infinite; }
+.ha-speed rect{ fill:#fff; opacity:0; animation:haSpeed .54s linear infinite; }
+.ha-speed rect:nth-child(2){ animation-delay:.12s; }
+.ha-speed rect:nth-child(3){ animation-delay:.24s; }
+@keyframes haBob{ 0%,100%{ transform:translateY(0) rotate(6deg);} 50%{ transform:translateY(-7px) rotate(6deg);} }
+@keyframes haSwingA{ 0%,100%{ transform:rotate(34deg);} 50%{ transform:rotate(-30deg);} }
+@keyframes haSwingB{ 0%,100%{ transform:rotate(-30deg);} 50%{ transform:rotate(34deg);} }
+@keyframes haSpeed{ 0%{ transform:translateX(16px); opacity:0;} 25%{ opacity:.75;} 100%{ transform:translateX(-30px); opacity:0;} }
+
+/* TYPE B — LIFE（ゆったり手を振る） */
+.ha-life .ha-body{ animation:haSway 3.6s ease-in-out infinite; }
+.ha-life .ha-arm-front{ animation:haWave 1.8s ease-in-out infinite; }
+.ha-life .ha-arm-back{ transform:rotate(9deg); }
+.ha-life .ha-leg-front{ transform:rotate(7deg); }
+.ha-life .ha-leg-back{ transform:rotate(-7deg); }
+.ha-sun-g{ transform-origin:center; animation:haSun 3.6s ease-in-out infinite; }
+.ha-sun{ fill:#ffd36b; }
+.ha-ray{ stroke:#ffd36b; stroke-width:3; stroke-linecap:round; }
+@keyframes haSway{ 0%,100%{ transform:rotate(-3deg);} 50%{ transform:rotate(3deg);} }
+@keyframes haWave{ 0%,100%{ transform:rotate(-126deg);} 50%{ transform:rotate(-152deg);} }
+@keyframes haSun{ 0%,100%{ transform:scale(1); opacity:.85;} 50%{ transform:scale(1.14); opacity:1;} }
+
+@media(prefers-reduced-motion:reduce){
+  .ha-go .ha-body,.ha-go .ha-leg-front,.ha-go .ha-leg-back,.ha-go .ha-arm-front,.ha-go .ha-arm-back,.ha-speed rect,.ha-life .ha-body,.ha-life .ha-arm-front,.ha-sun-g{ animation:none; }
+}
+@media(max-width:560px){ .human-anim{ height:120px; } .ha-figure{ width:98px; height:120px; } }
