@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leap-red.vercel.app/sitemap.xml
