@@ -147,10 +147,15 @@ async function sendMessage() {
   } finally { btn.disabled = false; }
 }
 
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
 function addMessage(role, text) {
   const w = document.createElement('div');
   w.className = 'chat-msg ' + role;
-  w.innerHTML = '<div class="chat-msg-bubble">' + text.replace(/\n/g, '<br>') + '</div>';
+  w.innerHTML = '<div class="chat-msg-bubble">' + escHtml(text).replace(/\n/g, '<br>') + '</div>';
   document.getElementById('chatMessages').appendChild(w);
   document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
 }

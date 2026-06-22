@@ -7,9 +7,23 @@
 //
 // ※ Resend では送信元ドメインの認証が必要です。認証前は onboarding@resend.dev で送信できます。
 
+// ベストエフォートのレート制限（ウォームインスタンス内のみ有効・スパム抑止）
+function rateLimited(req) {
+  const store = globalThis.__rl_contact || (globalThis.__rl_contact = new Map());
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  const now = Date.now(), WINDOW = 60000, MAX = 5;
+  const arr = (store.get(ip) || []).filter((t) => now - t < WINDOW);
+  if (arr.length >= MAX) return true;
+  arr.push(now); store.set(ip, arr);
+  return false;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+  if (rateLimited(req)) {
+    return res.status(429).json({ error: 'アクセスが集中しています。少し時間をおいて再度お試しください。' });
   }
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -55,7 +69,7 @@ export default async function handler(req, res) {
 
   const lines = [];
   for (const key of Object.keys(labels)) {
-    const v = (d[key] || '').toString().trim();
+    const v = (d[key] || '').toString().trim().slice(0, key === 'message' ? 4000 : 500);
     if (v) lines.push(`${labels[key]}：${v}`);
   }
 

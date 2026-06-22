@@ -16,6 +16,17 @@ function esc(s) {
   ));
 }
 
+// ベストエフォートのレート制限（ウォームインスタンス内のみ有効・スパム抑止）
+function rateLimited(req) {
+  const store = globalThis.__rl_apply || (globalThis.__rl_apply = new Map());
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  const now = Date.now(), WINDOW = 60000, MAX = 5;
+  const arr = (store.get(ip) || []).filter((t) => now - t < WINDOW);
+  if (arr.length >= MAX) return true;
+  arr.push(now); store.set(ip, arr);
+  return false;
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -23,6 +34,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method Not Allowed' }); return; }
+  if (rateLimited(req)) { res.status(429).json({ error: 'アクセスが集中しています。少し時間をおいて再度お試しください。' }); return; }
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   const FROM = process.env.APPLY_FROM_EMAIL || 'recruit@leap-transport.com';
