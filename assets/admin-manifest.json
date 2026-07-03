@@ -1,0 +1,2112 @@
+{
+  "generatedNote": "このファイルは scripts/gen-admin-manifest.mjs で自動生成されます。手動編集は上書きされます。",
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "トップページ",
+      "photoCount": 21,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/hero-poster.jpg",
+          "label": "動画ポスター",
+          "uses": 1,
+          "size": 66315
+        },
+        {
+          "path": "assets/hero.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 6060920
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "SERVICE 02 家電配送・設置工事",
+          "uses": 2,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aerial.jpg",
+          "label": "株式会社リープ 本社・物流センター 空撮",
+          "uses": 1,
+          "size": 276244
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "SERVICE 03 エアコン・電気工事（エアコン設置）",
+          "uses": 4,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-certs.jpg",
+          "label": "株式会社リープが取得している各種認証・表彰",
+          "uses": 1,
+          "size": 163583
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "SERVICE 01 一般貨物・取扱",
+          "uses": 3,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所 外観",
+          "uses": 2,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所 外観",
+          "uses": 2,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所 外観",
+          "uses": 2,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "SERVICE 05 輸送業者間 共同配送",
+          "uses": 2,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "SERVICE 04 一時保管・3PL",
+          "uses": 2,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "company.html",
+      "title": "会社案内",
+      "photoCount": 43,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "株式会社リープ 本社・春日部物流センターの車輌",
+          "uses": 3,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-lineup.jpg",
+          "label": "株式会社リープ 保有車輌",
+          "uses": 1,
+          "size": 340973
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 3,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior-dusk.jpg",
+          "label": "株式会社リープ 本社外観（夕景）",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 2,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-hq-trucks-sign.jpg",
+          "label": "株式会社リープ 本社",
+          "uses": 1,
+          "size": 277672
+        },
+        {
+          "path": "assets/real-hq-yard.jpg",
+          "label": "本社構内・保有車輌",
+          "uses": 1,
+          "size": 251103
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所 外観",
+          "uses": 2,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-ibaraki-fleet.jpg",
+          "label": "保有車輌",
+          "uses": 1,
+          "size": 322269
+        },
+        {
+          "path": "assets/real-ibaraki-warehouse.jpg",
+          "label": "倉庫棟",
+          "uses": 1,
+          "size": 315727
+        },
+        {
+          "path": "assets/real-ibaraki-yard.jpg",
+          "label": "構内・ヤード",
+          "uses": 1,
+          "size": 303408
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所 外観",
+          "uses": 2,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kanagawa-fleet.jpg",
+          "label": "保有車輌",
+          "uses": 1,
+          "size": 292509
+        },
+        {
+          "path": "assets/real-kanagawa-office.jpg",
+          "label": "事務所",
+          "uses": 1,
+          "size": 211535
+        },
+        {
+          "path": "assets/real-kanagawa-staff-sign.jpg",
+          "label": "神奈川営業所スタッフ",
+          "uses": 1,
+          "size": 411144
+        },
+        {
+          "path": "assets/real-kanagawa-wing.jpg",
+          "label": "ウィング車での荷役",
+          "uses": 1,
+          "size": 243076
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-logo-truck.jpg",
+          "label": "株式会社リープ 車輌ロゴ",
+          "uses": 1,
+          "size": 140793
+        },
+        {
+          "path": "assets/real-staff-branch-group.jpg",
+          "label": "茨城営業所スタッフ",
+          "uses": 1,
+          "size": 322491
+        },
+        {
+          "path": "assets/real-staff-honsha-group.jpg",
+          "label": "本社スタッフ集合",
+          "uses": 1,
+          "size": 519189
+        },
+        {
+          "path": "assets/real-veh-1t-van-1.jpg",
+          "label": "1t バン",
+          "uses": 1,
+          "size": 467034
+        },
+        {
+          "path": "assets/real-veh-2t-box-long-1.jpg",
+          "label": "2t 箱ロング 跳ね上げゲート",
+          "uses": 1,
+          "size": 324749
+        },
+        {
+          "path": "assets/real-veh-2t-flat-1.jpg",
+          "label": "2t 平ボディ",
+          "uses": 1,
+          "size": 198407
+        },
+        {
+          "path": "assets/real-veh-2t-long-1.jpg",
+          "label": "2t 標準ロング",
+          "uses": 1,
+          "size": 219148
+        },
+        {
+          "path": "assets/real-veh-2t-long-gate-1.jpg",
+          "label": "2t 標準ロング ゲート",
+          "uses": 1,
+          "size": 314662
+        },
+        {
+          "path": "assets/real-veh-2t-short-1.jpg",
+          "label": "2t ショート",
+          "uses": 1,
+          "size": 260440
+        },
+        {
+          "path": "assets/real-veh-4t-wing-1.jpg",
+          "label": "4t ウイング",
+          "uses": 1,
+          "size": 296046
+        },
+        {
+          "path": "assets/real-veh-4t-wing-gate-1.jpg",
+          "label": "4t フルワイドウィング 格納ゲート",
+          "uses": 1,
+          "size": 339627
+        },
+        {
+          "path": "assets/real-veh-4t-wing-lift-1.jpg",
+          "label": "4t フルワイドウィング 跳ね上げゲート",
+          "uses": 1,
+          "size": 356464
+        },
+        {
+          "path": "assets/real-veh-forklift-1.jpg",
+          "label": "フォークリフト荷役",
+          "uses": 1,
+          "size": 316393
+        },
+        {
+          "path": "assets/real-veh-maint-bldg-1.jpg",
+          "label": "自社整備棟",
+          "uses": 1,
+          "size": 322421
+        },
+        {
+          "path": "assets/real-veh-warehouse-1.jpg",
+          "label": "倉庫作業風景",
+          "uses": 1,
+          "size": 340631
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "倉庫内部（約300坪）",
+          "uses": 2,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "business.html",
+      "title": "事業内容",
+      "photoCount": 26,
+      "photos": [
+        {
+          "path": "assets/appliance-crane.jpg",
+          "label": "ユニック車による大型品の2階搬入",
+          "uses": 1,
+          "size": 227807
+        },
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "大型テレビの設置・配線作業",
+          "uses": 3,
+          "size": 171624
+        },
+        {
+          "path": "assets/appliance-wallmount.jpg",
+          "label": "壁掛けテレビの取付作業",
+          "uses": 1,
+          "size": 246792
+        },
+        {
+          "path": "assets/appliance-washer.jpg",
+          "label": "洗濯機の設置・給排水接続作業",
+          "uses": 1,
+          "size": 166112
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/flow-pc.jpg",
+          "label": "",
+          "uses": 1,
+          "size": 287179
+        },
+        {
+          "path": "assets/flow-sp.jpg",
+          "label": "",
+          "uses": 1,
+          "size": 292836
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 2,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aircon-standard-diagram.jpg",
+          "label": "",
+          "uses": 1,
+          "size": 306634
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 4,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-delivery.jpg",
+          "label": "お客様宅への配送・搬入",
+          "uses": 1,
+          "size": 384348
+        },
+        {
+          "path": "assets/real-kaden-loading.jpg",
+          "label": "トラックへの積込",
+          "uses": 1,
+          "size": 291773
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "配送・設置スタッフ",
+          "uses": 2,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kaden-warehouse.jpg",
+          "label": "家電倉庫での仕分け",
+          "uses": 1,
+          "size": 389025
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "transport.html",
+      "title": "運送・物流サービス",
+      "photoCount": 31,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/photo-warehouse.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 273360
+        },
+        {
+          "path": "assets/real-aerial.jpg",
+          "label": "本社・物流センター（空撮）",
+          "uses": 1,
+          "size": 276244
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-appliance-toshiba.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 273987
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hino-trailer.jpg",
+          "label": "企業様向け業務",
+          "uses": 1,
+          "size": 320123
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "本社・春日部物流センター 外観",
+          "uses": 3,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-delivery.jpg",
+          "label": "お客様宅への配送・搬入",
+          "uses": 1,
+          "size": 384348
+        },
+        {
+          "path": "assets/real-kaden-loading.jpg",
+          "label": "トラックへの積込",
+          "uses": 1,
+          "size": 291773
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "家電配送を担うチーム",
+          "uses": 2,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kaden-warehouse.jpg",
+          "label": "家電倉庫での仕分け・積込",
+          "uses": 1,
+          "size": 389025
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-veh-forklift-5.jpg",
+          "label": "カウンター式フォークリフト",
+          "uses": 1,
+          "size": 321998
+        },
+        {
+          "path": "assets/real-veh-forklift-8.jpg",
+          "label": "フォークリフト複数台",
+          "uses": 1,
+          "size": 314891
+        },
+        {
+          "path": "assets/real-veh-warehouse-1.jpg",
+          "label": "倉庫内保管",
+          "uses": 1,
+          "size": 340631
+        },
+        {
+          "path": "assets/real-veh-warehouse-2.jpg",
+          "label": "リーチフォークでの入出庫作業",
+          "uses": 1,
+          "size": 294798
+        },
+        {
+          "path": "assets/real-veh-warehouse-3.jpg",
+          "label": "フォークリフトでの積み込み",
+          "uses": 1,
+          "size": 291692
+        },
+        {
+          "path": "assets/real-veh-warehouse-5.jpg",
+          "label": "パレット保管",
+          "uses": 1,
+          "size": 390621
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        },
+        {
+          "path": "assets/real-work-rope-team.jpg",
+          "label": "一般貨物・取扱",
+          "uses": 1,
+          "size": 340560
+        }
+      ]
+    },
+    {
+      "file": "delivery.html",
+      "title": "家電配送・設置",
+      "photoCount": 22,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/photo-pallet.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 334487
+        },
+        {
+          "path": "assets/photo-wing.jpg",
+          "label": "ウィング車での積み込み",
+          "uses": 1,
+          "size": 272307
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-diagram-eco.jpg",
+          "label": "",
+          "uses": 1,
+          "size": 175137
+        },
+        {
+          "path": "assets/real-diagram-kyodo.jpg",
+          "label": "",
+          "uses": 1,
+          "size": 216892
+        },
+        {
+          "path": "assets/real-diagram-normal.jpg",
+          "label": "通常の配送：複数の業者と納品先の間でそれぞれ個別に配送するため、配送ルートが複雑になりコストや時間がかかる",
+          "uses": 1,
+          "size": 206921
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "共同配送の積み合わせ作業",
+          "uses": 2,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "office-honsha.html",
+      "title": "本社営業所",
+      "photoCount": 30,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-goldenhour.jpg",
+          "label": "夕日と保有車輌",
+          "uses": 1,
+          "size": 298672
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-lineup.jpg",
+          "label": "整列した保有車輌",
+          "uses": 1,
+          "size": 340973
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-fleet-warehouse.jpg",
+          "label": "倉庫と保有車輌",
+          "uses": 1,
+          "size": 294000
+        },
+        {
+          "path": "assets/real-forklift-crates.jpg",
+          "label": "フォークリフト荷役",
+          "uses": 1,
+          "size": 334487
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 3,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior-dusk.jpg",
+          "label": "株式会社リープ 本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 2,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-hq-yard.jpg",
+          "label": "本社構内・保有車輌",
+          "uses": 1,
+          "size": 251103
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-logo-truck.jpg",
+          "label": "車輌ロゴ（運ぶ信頼 届ける真心）",
+          "uses": 1,
+          "size": 140793
+        },
+        {
+          "path": "assets/real-staff-honsha-drivers.jpg",
+          "label": "配送スタッフ集合",
+          "uses": 1,
+          "size": 329120
+        },
+        {
+          "path": "assets/real-staff-honsha-office.jpg",
+          "label": "本社内勤スタッフ集合",
+          "uses": 1,
+          "size": 446124
+        },
+        {
+          "path": "assets/real-veh-2t-long-1.jpg",
+          "label": "2t 標準ロング",
+          "uses": 1,
+          "size": 219148
+        },
+        {
+          "path": "assets/real-veh-2t-long-gate-1.jpg",
+          "label": "2t 標準ロング ゲート",
+          "uses": 1,
+          "size": 314662
+        },
+        {
+          "path": "assets/real-veh-2t-short-1.jpg",
+          "label": "2t ショート",
+          "uses": 1,
+          "size": 260440
+        },
+        {
+          "path": "assets/real-veh-4t-wing-gate-1.jpg",
+          "label": "4t フルワイドウィング ゲート",
+          "uses": 1,
+          "size": 339627
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "倉庫内部（約300坪）",
+          "uses": 2,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "office-kanagawa.html",
+      "title": "神奈川営業所",
+      "photoCount": 27,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-drivers.jpg",
+          "label": "神奈川のドライバーチーム",
+          "uses": 1,
+          "size": 233279
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所 外観・社屋サイン",
+          "uses": 3,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kanagawa-fleet.jpg",
+          "label": "保有車輌",
+          "uses": 1,
+          "size": 292509
+        },
+        {
+          "path": "assets/real-kanagawa-hino.jpg",
+          "label": "大型車輌",
+          "uses": 1,
+          "size": 314613
+        },
+        {
+          "path": "assets/real-kanagawa-office.jpg",
+          "label": "事務所",
+          "uses": 1,
+          "size": 211535
+        },
+        {
+          "path": "assets/real-kanagawa-office2.jpg",
+          "label": "事務所",
+          "uses": 1,
+          "size": 268697
+        },
+        {
+          "path": "assets/real-kanagawa-staff-office.jpg",
+          "label": "神奈川営業所スタッフ",
+          "uses": 1,
+          "size": 184662
+        },
+        {
+          "path": "assets/real-kanagawa-staff-sign.jpg",
+          "label": "神奈川営業所スタッフ",
+          "uses": 1,
+          "size": 411144
+        },
+        {
+          "path": "assets/real-kanagawa-wing.jpg",
+          "label": "ウィング車での荷役",
+          "uses": 1,
+          "size": 243076
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-veh-2t-long-1.jpg",
+          "label": "2t標準ロング",
+          "uses": 1,
+          "size": 219148
+        },
+        {
+          "path": "assets/real-veh-4t-wing-gate-1.jpg",
+          "label": "4t フルワイドウイング 格納ゲート",
+          "uses": 1,
+          "size": 339627
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "office-ibaraki.html",
+      "title": "茨城営業所",
+      "photoCount": 34,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-drivers.jpg",
+          "label": "茨城の家電配送ドライバー",
+          "uses": 1,
+          "size": 219442
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所 外観・社屋サイン",
+          "uses": 3,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-ibaraki-fleet.jpg",
+          "label": "保有車輌",
+          "uses": 1,
+          "size": 322269
+        },
+        {
+          "path": "assets/real-ibaraki-forklift.jpg",
+          "label": "フォークリフト荷役",
+          "uses": 1,
+          "size": 315942
+        },
+        {
+          "path": "assets/real-ibaraki-hino.jpg",
+          "label": "大型車輌",
+          "uses": 1,
+          "size": 259209
+        },
+        {
+          "path": "assets/real-ibaraki-lounge.jpg",
+          "label": "休憩スペース",
+          "uses": 1,
+          "size": 222529
+        },
+        {
+          "path": "assets/real-ibaraki-meeting.jpg",
+          "label": "会議室",
+          "uses": 1,
+          "size": 168590
+        },
+        {
+          "path": "assets/real-ibaraki-office.jpg",
+          "label": "茨城営業所 内勤スタッフ",
+          "uses": 1,
+          "size": 220044
+        },
+        {
+          "path": "assets/real-ibaraki-office2.jpg",
+          "label": "事務所",
+          "uses": 1,
+          "size": 219925
+        },
+        {
+          "path": "assets/real-ibaraki-warehouse.jpg",
+          "label": "倉庫棟（70坪）",
+          "uses": 1,
+          "size": 315727
+        },
+        {
+          "path": "assets/real-ibaraki-yard.jpg",
+          "label": "構内・ヤード",
+          "uses": 1,
+          "size": 303408
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-staff-branch-group.jpg",
+          "label": "茨城の現場スタッフ",
+          "uses": 1,
+          "size": 322491
+        },
+        {
+          "path": "assets/real-veh-1t-van-1.jpg",
+          "label": "1tバン",
+          "uses": 1,
+          "size": 467034
+        },
+        {
+          "path": "assets/real-veh-2t-box-long-1.jpg",
+          "label": "2t 箱ロング 跳ね上げゲート",
+          "uses": 1,
+          "size": 324749
+        },
+        {
+          "path": "assets/real-veh-2t-long-1.jpg",
+          "label": "2t 標準ロング",
+          "uses": 1,
+          "size": 219148
+        },
+        {
+          "path": "assets/real-veh-2t-long-gate-1.jpg",
+          "label": "2t 標準ロング ゲート",
+          "uses": 1,
+          "size": 314662
+        },
+        {
+          "path": "assets/real-veh-4t-wing-1.jpg",
+          "label": "4t ウイング",
+          "uses": 1,
+          "size": 296046
+        },
+        {
+          "path": "assets/real-veh-4t-wing-gate-1.jpg",
+          "label": "4t フルワイドウィング ゲート",
+          "uses": 1,
+          "size": 339627
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "recruit.html",
+      "title": "採用情報",
+      "photoCount": 44,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 3,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電の配送・設置（ツーマン体制）",
+          "uses": 2,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 4,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-appliance-toshiba.jpg",
+          "label": "家電配送に取り組む若手スタッフ",
+          "uses": 1,
+          "size": 273987
+        },
+        {
+          "path": "assets/real-driver-cab-1.jpg",
+          "label": "意欲的に働くドライバー",
+          "uses": 2,
+          "size": 192487
+        },
+        {
+          "path": "assets/real-driver-cab-2.jpg",
+          "label": "定期便ドライバー",
+          "uses": 2,
+          "size": 186390
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "運転席のドライバー",
+          "uses": 3,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 3,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-elf-4.jpg",
+          "label": "株式会社リープ 小型車輌",
+          "uses": 1,
+          "size": 338943
+        },
+        {
+          "path": "assets/real-fleet-hino-blue.jpg",
+          "label": "株式会社リープ 大型車輌",
+          "uses": 1,
+          "size": 261651
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-ibaraki-forklift.jpg",
+          "label": "フォークリフトでの荷役",
+          "uses": 1,
+          "size": 315942
+        },
+        {
+          "path": "assets/real-kaden-delivery.jpg",
+          "label": "お客様宅への配送・搬入",
+          "uses": 1,
+          "size": 384348
+        },
+        {
+          "path": "assets/real-kaden-loading.jpg",
+          "label": "トラックへの積込",
+          "uses": 1,
+          "size": 291773
+        },
+        {
+          "path": "assets/real-kaden-meeting.jpg",
+          "label": "朝礼・打ち合わせ",
+          "uses": 1,
+          "size": 416674
+        },
+        {
+          "path": "assets/real-kaden-team-casual.jpg",
+          "label": "和やかな職場の雰囲気",
+          "uses": 1,
+          "size": 311298
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "家電配送チーム",
+          "uses": 2,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kaden-warehouse.jpg",
+          "label": "家電倉庫での仕分け・積込",
+          "uses": 1,
+          "size": 389025
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-staff-branch-group.jpg",
+          "label": "営業所スタッフ集合",
+          "uses": 1,
+          "size": 322491
+        },
+        {
+          "path": "assets/real-staff-kneel.jpg",
+          "label": "若手スタッフ",
+          "uses": 1,
+          "size": 211998
+        },
+        {
+          "path": "assets/real-staff-management.jpg",
+          "label": "代表・管理・事務スタッフ",
+          "uses": 1,
+          "size": 219696
+        },
+        {
+          "path": "assets/real-staff-veteran.jpg",
+          "label": "ベテランスタッフ",
+          "uses": 1,
+          "size": 215728
+        },
+        {
+          "path": "assets/real-veh-equip-1.jpg",
+          "label": "カーナビ・デジタコ",
+          "uses": 1,
+          "size": 253700
+        },
+        {
+          "path": "assets/real-veh-equip-6.jpg",
+          "label": "バックカメラ",
+          "uses": 1,
+          "size": 236099
+        },
+        {
+          "path": "assets/real-veh-forklift-1.jpg",
+          "label": "リーチ式フォークリフト",
+          "uses": 1,
+          "size": 316393
+        },
+        {
+          "path": "assets/real-veh-maint-bldg-2.jpg",
+          "label": "自社整備棟",
+          "uses": 1,
+          "size": 327959
+        },
+        {
+          "path": "assets/real-veh-maint-check-1.jpg",
+          "label": "車両点検",
+          "uses": 1,
+          "size": 330382
+        },
+        {
+          "path": "assets/real-veh-warehouse-3.jpg",
+          "label": "倉庫作業",
+          "uses": 1,
+          "size": 291692
+        },
+        {
+          "path": "assets/real-veh-warehouse-5.jpg",
+          "label": "パレット単位の保管",
+          "uses": 1,
+          "size": 390621
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        },
+        {
+          "path": "assets/real-work-appliance-load.jpg",
+          "label": "家電の搬入",
+          "uses": 1,
+          "size": 245167
+        },
+        {
+          "path": "assets/real-work-rope-team.jpg",
+          "label": "一般貨物の積込・配送",
+          "uses": 1,
+          "size": 340560
+        },
+        {
+          "path": "assets/real-work-tarp-smile.jpg",
+          "label": "現場での作業",
+          "uses": 1,
+          "size": 189730
+        },
+        {
+          "path": "assets/recruit-hero-poster.jpg",
+          "label": "株式会社リープ ドライバー・スタッフ募集",
+          "uses": 2,
+          "size": 81350
+        },
+        {
+          "path": "assets/recruit-hero.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 1670467
+        }
+      ]
+    },
+    {
+      "file": "recruit2.html",
+      "title": "採用情報（ドライバー）",
+      "photoCount": 23,
+      "photos": [
+        {
+          "path": "assets/appliance-crane.jpg",
+          "label": "大型品の搬入・設置作業",
+          "uses": 1,
+          "size": 227807
+        },
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 3,
+          "size": 171624
+        },
+        {
+          "path": "assets/appliance-wallmount.jpg",
+          "label": "壁掛けテレビ取付",
+          "uses": 1,
+          "size": 246792
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電設置工事の様子",
+          "uses": 2,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "株式会社リープ 電気工事士 業務委託募集",
+          "uses": 4,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-appliance-toshiba.jpg",
+          "label": "家電の配送・設置",
+          "uses": 1,
+          "size": 273987
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 3,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-elf-3.jpg",
+          "label": "リープの自社車両",
+          "uses": 1,
+          "size": 262167
+        },
+        {
+          "path": "assets/real-fleet-goldenhour.jpg",
+          "label": "保有車輌",
+          "uses": 1,
+          "size": 298672
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-delivery.jpg",
+          "label": "現場での搬入・設置作業",
+          "uses": 1,
+          "size": 384348
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "news.html",
+      "title": "お知らせ",
+      "photoCount": 18,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/real-20th-anniversary.jpg",
+          "label": "20周年記念｜お知らせ・NEWS",
+          "uses": 1,
+          "size": 248616
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        }
+      ]
+    },
+    {
+      "file": "contact.html",
+      "title": "お問い合わせ",
+      "photoCount": 18,
+      "photos": [
+        {
+          "path": "assets/appliance-tv.jpg",
+          "label": "家電配送スタッフ募集",
+          "uses": 2,
+          "size": 171624
+        },
+        {
+          "path": "assets/asset01.png",
+          "label": "株式会社リープ",
+          "uses": 3,
+          "size": 7818
+        },
+        {
+          "path": "assets/bot-recruit.mp4",
+          "label": "",
+          "uses": 1,
+          "size": 2238466
+        },
+        {
+          "path": "assets/photo-appliance.jpg",
+          "label": "家電配送・工事",
+          "uses": 1,
+          "size": 225220
+        },
+        {
+          "path": "assets/photo-sign.jpg",
+          "label": "お問い合わせ",
+          "uses": 1,
+          "size": 165649
+        },
+        {
+          "path": "assets/real-aircon-work.jpg",
+          "label": "個人様向け 家電設置サービス",
+          "uses": 3,
+          "size": 160856
+        },
+        {
+          "path": "assets/real-driver-smile.jpg",
+          "label": "よくあるご質問",
+          "uses": 1,
+          "size": 165596
+        },
+        {
+          "path": "assets/real-elf-white-front.jpg",
+          "label": "2t 一般配送ドライバー募集",
+          "uses": 2,
+          "size": 291848
+        },
+        {
+          "path": "assets/real-fleet-hq-lineup.jpg",
+          "label": "企業様向けサービス",
+          "uses": 2,
+          "size": 244504
+        },
+        {
+          "path": "assets/real-fleet-vans.jpg",
+          "label": "対応エリア",
+          "uses": 1,
+          "size": 229713
+        },
+        {
+          "path": "assets/real-hino-blue-front.jpg",
+          "label": "4t 一般配送ドライバー募集",
+          "uses": 1,
+          "size": 276768
+        },
+        {
+          "path": "assets/real-hq-building.jpg",
+          "label": "会社案内",
+          "uses": 2,
+          "size": 351907
+        },
+        {
+          "path": "assets/real-hq-exterior.jpg",
+          "label": "本社・春日部営業所",
+          "uses": 1,
+          "size": 292911
+        },
+        {
+          "path": "assets/real-ibaraki-exterior.jpg",
+          "label": "茨城営業所",
+          "uses": 1,
+          "size": 272981
+        },
+        {
+          "path": "assets/real-kaden-team.jpg",
+          "label": "採用情報",
+          "uses": 1,
+          "size": 329261
+        },
+        {
+          "path": "assets/real-kanagawa-exterior.jpg",
+          "label": "神奈川営業所",
+          "uses": 1,
+          "size": 375988
+        },
+        {
+          "path": "assets/real-kyodo-haisou.jpg",
+          "label": "輸送業者間 共同配送",
+          "uses": 1,
+          "size": 455898
+        },
+        {
+          "path": "assets/real-warehouse-interior.jpg",
+          "label": "一時保管・3PL",
+          "uses": 1,
+          "size": 225837
+        }
+      ]
+    }
+  ],
+  "totalUniqueAssets": 106
+}

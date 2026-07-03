@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>写真管理｜株式会社リープ 管理画面</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0e1d36; --navy-2:#16273f; --accent:#e0851f; --red:#c8341e;
+    --ink:#1a2436; --ink-2:#4a566b; --ink-3:#8b95a7;
+    --line:#e3e7ee; --bg:#f4f6fa; --card:#fff; --ok:#1f9d55;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    font-family:'Noto Sans JP',sans-serif; color:var(--ink); background:var(--bg);
+    -webkit-font-smoothing:antialiased; line-height:1.6;
+  }
+  a{ color:var(--accent); }
+  button{ font-family:inherit; cursor:pointer; }
+  .hidden{ display:none !important; }
+
+  /* ---- ヘッダー ---- */
+  header{
+    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff; padding:14px 20px; display:flex; align-items:center; gap:14px;
+    position:sticky; top:0; z-index:20; box-shadow:0 2px 12px rgba(14,29,54,.18);
+  }
+  header .brand{ font-weight:700; font-size:16px; letter-spacing:.02em; }
+  header .brand small{ display:block; font-size:11px; color:#97a0b0; font-weight:500; letter-spacing:.16em; }
+  header .spacer{ flex:1; }
+  header .who{ font-size:12px; color:#b7c0d0; }
+  .btn{
+    border:0; border-radius:8px; padding:9px 16px; font-weight:700; font-size:13px;
+    background:var(--accent); color:#fff; transition:filter .15s, transform .05s;
+  }
+  .btn:hover{ filter:brightness(1.06); }
+  .btn:active{ transform:translateY(1px); }
+  .btn.ghost{ background:rgba(255,255,255,.12); color:#fff; }
+  .btn.sm{ padding:7px 12px; font-size:12px; }
+  .btn:disabled{ opacity:.5; cursor:not-allowed; }
+
+  /* ---- ログイン ---- */
+  .login-wrap{ min-height:70vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .login-card{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:34px 30px; width:100%; max-width:380px; box-shadow:0 12px 40px rgba(14,29,54,.10);
+  }
+  .login-card h1{ font-size:20px; margin:0 0 4px; }
+  .login-card p.sub{ font-size:13px; color:var(--ink-2); margin:0 0 22px; }
+  label.fld{ display:block; font-size:12px; font-weight:700; color:var(--ink-2); margin:0 0 6px; }
+  input[type=password], input[type=text], textarea{
+    width:100%; border:1px solid var(--line); border-radius:9px; padding:11px 13px;
+    font-family:inherit; font-size:14px; color:var(--ink); background:#fbfcfe;
+  }
+  input:focus, textarea:focus{ outline:2px solid rgba(224,133,31,.35); border-color:var(--accent); }
+  .login-card .btn{ width:100%; margin-top:16px; padding:12px; font-size:14px; }
+
+  /* ---- レイアウト ---- */
+  main{ max-width:1180px; margin:0 auto; padding:22px 20px 80px; }
+  .toolbar{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:18px; }
+  .toolbar h2{ font-size:17px; margin:0; }
+  .pageselect{ display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 20px; }
+  .pagechip{
+    border:1px solid var(--line); background:#fff; color:var(--ink-2);
+    border-radius:999px; padding:8px 15px; font-size:13px; font-weight:700;
+  }
+  .pagechip .n{ color:var(--ink-3); font-weight:500; margin-left:5px; font-size:11px; }
+  .pagechip.active{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .pagechip.active .n{ color:#9fb0cc; }
+  .pagebar{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin-bottom:16px;
+  }
+  .pagebar .title{ font-weight:700; font-size:15px; }
+  .pagebar .meta{ font-size:12px; color:var(--ink-3); }
+
+  /* ---- 写真グリッド ---- */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+  .photo{
+    background:var(--card); border:1px solid var(--line); border-radius:13px; overflow:hidden;
+    display:flex; flex-direction:column; box-shadow:0 2px 10px rgba(14,29,54,.05);
+  }
+  .thumb{
+    aspect-ratio:4/3; background:#eef1f6 center/cover no-repeat; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb .vidbadge{
+    position:absolute; inset:auto 8px 8px auto; background:rgba(14,29,54,.82); color:#fff;
+    font-size:10px; font-weight:700; padding:3px 8px; border-radius:6px; letter-spacing:.05em;
+  }
+  .pmeta{ padding:11px 13px 13px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .pmeta .lbl{ font-size:13px; font-weight:700; line-height:1.4; min-height:1.4em; }
+  .pmeta .path{ font-size:11px; color:var(--ink-3); word-break:break-all; font-family:ui-monospace,monospace; }
+  .pmeta .row{ display:flex; align-items:center; gap:8px; margin-top:auto; }
+  .pmeta .size{ font-size:11px; color:var(--ink-3); }
+  .repl{ flex:1; }
+  .status{ font-size:11px; font-weight:700; }
+  .status.ok{ color:var(--ok); }
+  .status.err{ color:var(--red); }
+  .status.busy{ color:var(--accent); }
+
+  /* ---- モーダル ---- */
+  .modal-back{
+    position:fixed; inset:0; background:rgba(14,29,54,.55); z-index:50;
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal{
+    background:#fff; border-radius:16px; width:100%; max-width:520px; overflow:hidden;
+    box-shadow:0 24px 70px rgba(14,29,54,.35); max-height:92vh; display:flex; flex-direction:column;
+  }
+  .modal h3{ margin:0; padding:18px 22px; font-size:16px; border-bottom:1px solid var(--line); }
+  .modal .body{ padding:20px 22px; overflow:auto; }
+  .cmp{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+  .cmp figure{ margin:0; }
+  .cmp figcaption{ font-size:11px; font-weight:700; color:var(--ink-3); margin:0 0 6px; letter-spacing:.05em; }
+  .cmp .box{ aspect-ratio:4/3; border:1px solid var(--line); border-radius:9px; background:#eef1f6 center/cover no-repeat; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .cmp .box img{ width:100%; height:100%; object-fit:cover; }
+  .cmp .box .ph{ font-size:12px; color:var(--ink-3); }
+  .drop{
+    border:2px dashed var(--line); border-radius:12px; padding:22px; text-align:center;
+    color:var(--ink-2); font-size:13px; background:#fbfcfe; transition:border-color .15s, background .15s;
+  }
+  .drop.drag{ border-color:var(--accent); background:#fff7ed; }
+  .drop strong{ color:var(--accent); }
+  .hint{ font-size:11px; color:var(--ink-3); margin-top:8px; }
+  .modal .foot{ padding:14px 22px; border-top:1px solid var(--line); display:flex; gap:10px; justify-content:flex-end; align-items:center; }
+  .modal .foot .msg{ flex:1; font-size:12px; }
+
+  /* ---- トースト ---- */
+  #toast{
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px);
+    background:var(--navy); color:#fff; padding:12px 20px; border-radius:10px; font-size:13px; font-weight:500;
+    box-shadow:0 10px 30px rgba(14,29,54,.3); opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:80; max-width:90vw;
+  }
+  #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  #toast a{ color:#ffcf8f; }
+  .banner{
+    background:#fff6ed; border:1px solid #f3d3a6; color:#8a5a12; border-radius:10px;
+    padding:12px 15px; font-size:13px; margin-bottom:18px; line-height:1.6;
+  }
+  .banner.err{ background:#fdecea; border-color:#f3b6ae; color:#8f2318; }
+</style>
+</head>
+<body>
+
+<!-- ===== ログイン画面 ===== -->
+<section id="loginView" class="login-wrap">
+  <form class="login-card" id="loginForm" autocomplete="off">
+    <h1>写真管理</h1>
+    <p class="sub">株式会社リープ ホームページ 管理画面</p>
+    <div id="loginBanner"></div>
+    <label class="fld" for="pw">管理パスワード</label>
+    <input type="password" id="pw" autocomplete="current-password" required>
+    <button class="btn" type="submit" id="loginBtn">ログイン</button>
+  </form>
+</section>
+
+<!-- ===== 管理画面本体 ===== -->
+<div id="appView" class="hidden">
+  <header>
+    <div class="brand">株式会社リープ<small>PHOTO ADMIN</small></div>
+    <div class="spacer"></div>
+    <span class="who" id="expLabel"></span>
+    <button class="btn ghost sm" id="logoutBtn">ログアウト</button>
+  </header>
+  <main>
+    <div id="appBanner"></div>
+    <div class="toolbar">
+      <h2>ページの写真を差し替え</h2>
+    </div>
+    <div class="pageselect" id="pageChips"></div>
+    <div class="pagebar" id="pageBar"></div>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+
+<!-- ===== 差し替えモーダル ===== -->
+<div id="modalBack" class="modal-back hidden">
+  <div class="modal">
+    <h3 id="modalTitle">写真を差し替え</h3>
+    <div class="body">
+      <div class="cmp">
+        <figure>
+          <figcaption>現在の写真</figcaption>
+          <div class="box" id="curBox"></div>
+        </figure>
+        <figure>
+          <figcaption>新しい写真</figcaption>
+          <div class="box" id="newBox"><span class="ph">未選択</span></div>
+        </figure>
+      </div>
+      <div class="drop" id="drop">
+        画像をここにドラッグ、または <strong>クリックして選択</strong>
+        <input type="file" id="file" accept="image/*" class="hidden">
+        <div class="hint" id="dropHint">JPEG / PNG / WebP（大きい画像は自動で縮小します・上限4MB）</div>
+      </div>
+      <div style="margin-top:14px;">
+        <label class="fld" for="comment">変更メモ（任意・コミットに残ります）</label>
+        <input type="text" id="comment" maxlength="60" placeholder="例: 事務所外観を最新のものに更新">
+      </div>
+    </div>
+    <div class="foot">
+      <span class="msg" id="modalMsg"></span>
+      <button class="btn ghost sm" id="cancelBtn" style="background:#eef1f6;color:var(--ink-2);">キャンセル</button>
+      <button class="btn" id="applyBtn" disabled>差し替えを反映</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+  const TOKEN_KEY = 'leap_admin_token';
+  const EXP_KEY = 'leap_admin_exp';
+  const MAX_BYTES = 4 * 1024 * 1024;
+  const MAX_EDGE = 2000; // 長辺の上限（自動縮小）
+
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  let manifest = null;
+  let activePageIdx = 0;
+  let selected = null; // { path, label, cardStatusEl }
+  let pending = null;  // { base64, filename, bytes, url }
+
+  // ---------- トークン管理 ----------
+  function token(){ return sessionStorage.getItem(TOKEN_KEY); }
+  function tokenValid(){
+    const t = token(); const exp = Number(sessionStorage.getItem(EXP_KEY) || 0);
+    return t && exp > Date.now();
+  }
+  function saveToken(t, exp){ sessionStorage.setItem(TOKEN_KEY, t); sessionStorage.setItem(EXP_KEY, String(exp)); }
+  function clearToken(){ sessionStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(EXP_KEY); }
+
+  function toast(html, ms){
+    const el = $('#toast'); el.innerHTML = html; el.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('show'), ms || 4200);
+  }
+  function banner(sel, html, isErr){
+    const el = $(sel);
+    if (!html){ el.innerHTML = ''; return; }
+    el.innerHTML = '<div class="banner' + (isErr ? ' err' : '') + '">' + html + '</div>';
+  }
+
+  // ---------- 画面切替 ----------
+  function showLogin(msg, isErr){
+    $('#appView').classList.add('hidden');
+    $('#loginView').classList.remove('hidden');
+    banner('#loginBanner', msg, isErr);
+    setTimeout(() => $('#pw').focus(), 50);
+  }
+  async function showApp(){
+    $('#loginView').classList.add('hidden');
+    $('#appView').classList.remove('hidden');
+    const exp = Number(sessionStorage.getItem(EXP_KEY) || 0);
+    if (exp) $('#expLabel').textContent = '有効期限 ' + new Date(exp).toLocaleString('ja-JP', { hour:'2-digit', minute:'2-digit', month:'numeric', day:'numeric' });
+    if (!manifest) await loadManifest();
+  }
+
+  // ---------- ログイン ----------
+  $('#loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = $('#loginBtn'); btn.disabled = true; btn.textContent = '確認中…';
+    banner('#loginBanner', '');
+    try {
+      const r = await fetch('/api/admin/auth', {
+        method:'POST', headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ password: $('#pw').value }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok){ banner('#loginBanner', esc(data.error || 'ログインに失敗しました。'), true); return; }
+      saveToken(data.token, data.expiresAt);
+      $('#pw').value = '';
+      await showApp();
+    } catch (err) {
+      banner('#loginBanner', '通信エラーが発生しました。', true);
+    } finally {
+      btn.disabled = false; btn.textContent = 'ログイン';
+    }
+  });
+
+  $('#logoutBtn').addEventListener('click', () => { clearToken(); showLogin(); });
+
+  // ---------- マニフェスト ----------
+  async function loadManifest(){
+    try {
+      const r = await fetch('/assets/admin-manifest.json?v=' + Date.now());
+      if (!r.ok) throw new Error('manifest');
+      manifest = await r.json();
+      renderChips(); renderPage(0);
+    } catch (err) {
+      banner('#appBanner', '写真一覧（admin-manifest.json）を読み込めませんでした。<code>node scripts/gen-admin-manifest.mjs</code> で生成してください。', true);
+    }
+  }
+
+  function renderChips(){
+    $('#pageChips').innerHTML = manifest.pages.map((p, i) =>
+      '<button class="pagechip" data-i="' + i + '">' + esc(p.title) +
+      '<span class="n">' + p.photoCount + '</span></button>'
+    ).join('');
+    $$('#pageChips .pagechip').forEach((el) => el.addEventListener('click', () => renderPage(Number(el.dataset.i))));
+  }
+
+  function isVideo(path){ return /\.mp4$/i.test(path); }
+  function fmtSize(b){ return b == null ? '' : (b >= 1024*1024 ? (b/1024/1024).toFixed(1)+'MB' : Math.round(b/1024)+'KB'); }
+
+  function renderPage(idx){
+    activePageIdx = idx;
+    const page = manifest.pages[idx];
+    $$('#pageChips .pagechip').forEach((el, i) => el.classList.toggle('active', i === idx));
+    $('#pageBar').innerHTML =
+      '<span class="title">' + esc(page.title) + '</span>' +
+      '<span class="meta">' + esc(page.file) + '</span>' +
+      '<span class="meta">写真 ' + page.photoCount + ' 点</span>' +
+      '<a class="meta" href="/' + esc(page.file) + '" target="_blank" rel="noopener">ページを開く ↗</a>';
+
+    $('#grid').innerHTML = page.photos.map((ph, i) => {
+      const vid = isVideo(ph.path);
+      const thumb = vid
+        ? '<div class="thumb"><span style="color:var(--ink-3);font-size:12px;">動画ファイル</span><span class="vidbadge">MP4</span></div>'
+        : '<div class="thumb"><img loading="lazy" src="/' + esc(ph.path) + '?v=' + (ph.size||0) + '" alt=""></div>';
+      return '<div class="photo" data-i="' + i + '">' + thumb +
+        '<div class="pmeta">' +
+          '<div class="lbl">' + esc(ph.label || '(ラベルなし)') + '</div>' +
+          '<div class="path">' + esc(ph.path) + '</div>' +
+          '<div class="row">' +
+            '<button class="btn sm repl" ' + (vid ? 'disabled title="動画はgitで差し替え"' : '') + '>差し替え</button>' +
+            '<span class="size">' + fmtSize(ph.size) + '</span>' +
+          '</div>' +
+          '<div class="status" data-status></div>' +
+        '</div></div>';
+    }).join('');
+
+    $$('#grid .photo').forEach((card) => {
+      const i = Number(card.dataset.i);
+      const ph = page.photos[i];
+      const btn = $('.repl', card);
+      if (btn && !btn.disabled) btn.addEventListener('click', () => openModal(ph, card));
+    });
+  }
+
+  // ---------- モーダル / 差し替え ----------
+  function openModal(ph, card){
+    selected = { path: ph.path, label: ph.label, statusEl: $('[data-status]', card), size: ph.size };
+    pending = null;
+    $('#modalTitle').textContent = '写真を差し替え：' + (ph.label || ph.path);
+    $('#curBox').innerHTML = '<img src="/' + esc(ph.path) + '?v=' + (ph.size||0) + '" alt="">';
+    $('#newBox').innerHTML = '<span class="ph">未選択</span>';
+    $('#comment').value = '';
+    $('#modalMsg').textContent = '';
+    $('#applyBtn').disabled = true;
+    $('#file').value = '';
+    $('#modalBack').classList.remove('hidden');
+  }
+  function closeModal(){ $('#modalBack').classList.add('hidden'); selected = null; pending = null; }
+
+  $('#cancelBtn').addEventListener('click', closeModal);
+  $('#modalBack').addEventListener('click', (e) => { if (e.target === $('#modalBack')) closeModal(); });
+
+  const drop = $('#drop');
+  drop.addEventListener('click', () => $('#file').click());
+  ['dragenter','dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('drag'); }));
+  ['dragleave','drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('drag'); }));
+  drop.addEventListener('drop', (e) => { const f = e.dataTransfer.files[0]; if (f) handleFile(f); });
+  $('#file').addEventListener('change', (e) => { const f = e.target.files[0]; if (f) handleFile(f); });
+
+  // 画像を必要に応じ縮小し、拡張子に応じたbase64を作る
+  async function handleFile(file){
+    $('#modalMsg').style.color = 'var(--ink-2)';
+    $('#modalMsg').textContent = '読み込み中…';
+    $('#applyBtn').disabled = true;
+    const ext = (selected.path.split('.').pop() || '').toLowerCase();
+    try {
+      const out = await prepareImage(file, ext);
+      if (out.bytes > MAX_BYTES){
+        $('#modalMsg').style.color = 'var(--red)';
+        $('#modalMsg').textContent = '縮小してもサイズが大きすぎます（' + fmtSize(out.bytes) + '）。より小さい画像を選んでください。';
+        return;
+      }
+      pending = out;
+      $('#newBox').innerHTML = '<img src="' + out.url + '" alt="">';
+      $('#modalMsg').style.color = 'var(--ink-2)';
+      $('#modalMsg').textContent = '準備完了（' + fmtSize(out.bytes) + (out.resized ? '・自動縮小済み' : '') + '）';
+      $('#applyBtn').disabled = false;
+    } catch (err) {
+      $('#modalMsg').style.color = 'var(--red)';
+      $('#modalMsg').textContent = String(err.message || err);
+    }
+  }
+
+  function prepareImage(file, targetExt){
+    return new Promise((resolve, reject) => {
+      // 差し替え先が同じ形式（png/webp/gif）ならなるべく無変換、jpgは常にjpeg化
+      const asDataUrl = () => {
+        const fr = new FileReader();
+        fr.onload = () => resolve({ base64: fr.result, url: fr.result, bytes: file.size, filename: file.name, resized:false });
+        fr.onerror = () => reject(new Error('ファイルを読み込めませんでした。'));
+        fr.readAsDataURL(file);
+      };
+      if (!/^image\//.test(file.type)) return reject(new Error('画像ファイルを選択してください。'));
+
+      const img = new Image();
+      const objUrl = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(objUrl);
+        const needResize = Math.max(img.width, img.height) > MAX_EDGE || file.size > 1.5 * 1024 * 1024;
+        const isGif = /gif$/i.test(targetExt) || file.type === 'image/gif';
+        if (!needResize || isGif) return asDataUrl();
+
+        const scale = Math.min(1, MAX_EDGE / Math.max(img.width, img.height));
+        const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+        const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        const ctx = cv.getContext('2d');
+        if (/png$/i.test(targetExt)) { /* keep alpha */ } else { ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h); }
+        ctx.drawImage(img, 0, 0, w, h);
+        const mime = /png$/i.test(targetExt) ? 'image/png' : /webp$/i.test(targetExt) ? 'image/webp' : 'image/jpeg';
+        const q = mime === 'image/jpeg' ? 0.85 : 0.9;
+        const durl = cv.toDataURL(mime, q);
+        const bytes = Math.round((durl.length - durl.indexOf(',') - 1) * 3 / 4);
+        resolve({ base64: durl, url: durl, bytes, filename: file.name, resized:true });
+      };
+      img.onerror = () => { URL.revokeObjectURL(objUrl); reject(new Error('画像を読み込めませんでした。')); };
+      img.src = objUrl;
+    });
+  }
+
+  $('#applyBtn').addEventListener('click', async () => {
+    if (!pending || !selected) return;
+    const btn = $('#applyBtn'); btn.disabled = true; btn.textContent = '反映中…';
+    $('#modalMsg').style.color = 'var(--ink-2)'; $('#modalMsg').textContent = 'GitHubへコミット中…';
+    try {
+      const r = await fetch('/api/admin/replace', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer ' + token() },
+        body: JSON.stringify({
+          path: selected.path,
+          filename: pending.filename,
+          contentBase64: pending.base64,
+          comment: $('#comment').value.trim(),
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (r.status === 401){ closeModal(); clearToken(); showLogin('セッションの有効期限が切れました。再度ログインしてください。', true); return; }
+      if (!r.ok){
+        $('#modalMsg').style.color = 'var(--red)';
+        $('#modalMsg').textContent = (data.error || '差し替えに失敗しました。') + (data.detail ? '（' + data.detail + '）' : '');
+        return;
+      }
+      // 反映成功：サムネ更新（キャッシュバスト）・トースト
+      const ph = manifest.pages[activePageIdx].photos.find((p) => p.path === selected.path);
+      if (ph) ph.size = data.bytes;
+      const bust = Date.now();
+      if (selected.statusEl){ selected.statusEl.className = 'status ok'; selected.statusEl.textContent = '✔ 差し替え済み（反映まで数十秒）'; }
+      // グリッドのサムネも差し替え
+      renderPage(activePageIdx);
+      const cid = data.commit && data.commit.sha ? data.commit.sha.slice(0,7) : '';
+      toast('差し替えを反映しました。数十秒〜数分で本番サイトに反映されます。' + (data.commit && data.commit.url ? ' <a href="'+data.commit.url+'" target="_blank" rel="noopener">コミット '+cid+' ↗</a>' : ''), 7000);
+      closeModal();
+    } catch (err) {
+      $('#modalMsg').style.color = 'var(--red)';
+      $('#modalMsg').textContent = '通信エラーが発生しました。';
+    } finally {
+      btn.disabled = false; btn.textContent = '差し替えを反映';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#modalBack').classList.contains('hidden')) closeModal(); });
+
+  // ---------- 起動 ----------
+  if (tokenValid()) { showApp(); } else { clearToken(); showLogin(); }
+})();
+</script>
+</body>
+</html>
