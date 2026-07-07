@@ -54,12 +54,23 @@
     document.body.style.overflow = 'hidden';
   }
 
+  function firstItem(gallery) {
+    var nodes = gallery.querySelectorAll('figure, .gallery-item');
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].tagName !== 'BUTTON' && nodes[i].querySelector('img')) return nodes[i];
+    }
+    return null;
+  }
+
   document.addEventListener('click', function (e) {
     var gallery = e.target.closest('.appliance-gallery, .rec-gallery, .facility-grid');
     if (!gallery) return;
     var item = e.target.closest('figure, .gallery-item');
     if (!item || item.tagName === 'BUTTON') return; // ボタンは各ページのonclickに任せる
     if (!item.querySelector('img')) return;
+    // 同一ギャラリー内はどの写真をクリックしても同じ組が開くため、
+    // 先頭（左端）の1枚だけをクリック可能にし、それ以外は反応させない。
+    if (item !== firstItem(gallery)) return;
     e.preventDefault();
     openFrom(gallery, item);
   });
