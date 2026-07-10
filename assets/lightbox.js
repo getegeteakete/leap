@@ -1,8 +1,10 @@
 // 共有ライトボックス：素の<figure>ギャラリーをクリック委譲で開閉する。
-// クリックした写真をその位置（アップ）から表示し、関連写真を左右送りできる。
+// 表示ルール：各ギャラリーの「左端（先頭）の1枚」だけがその組の写真を全部見られる写真集。
+// 2枚目以降はクリックでその1枚だけを拡大（送りなし）。
 // ※ボタン要素（office/company の data-images 付き）は各ページのonclickが処理するため除外。
 (function () {
-  var imgs = [], idx = 0;
+  var imgs = [], idx = 0, single = false;
+  var GAL_SEL = '.appliance-gallery, .rec-gallery, .facility-grid';
 
   function ensure() {
     if (document.getElementById('vehLightbox')) return;
@@ -28,6 +30,11 @@
   function show() {
     document.getElementById('vehLbImg').src = imgs[idx];
     document.getElementById('vehLbCounter').textContent = (idx + 1) + ' / ' + imgs.length;
+    // 1枚だけ（2枚目以降＝拡大のみ）のときは送り矢印・カウンターを隠す
+    var lb = document.getElementById('vehLightbox');
+    lb.querySelector('.veh-lb-prev').style.display = single ? 'none' : '';
+    lb.querySelector('.veh-lb-next').style.display = single ? 'none' : '';
+    document.getElementById('vehLbCounter').style.display = single ? 'none' : '';
   }
   function nav(dir) { idx = (idx + dir + imgs.length) % imgs.length; show(); }
   function close() {
@@ -36,9 +43,18 @@
     document.body.style.overflow = '';
   }
 
+  function open(title) {
+    ensure();
+    document.getElementById('vehLbTitle').textContent = title || '';
+    show();
+    document.getElementById('vehLightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 先頭の1枚：その組の写真を全部（前へ／次へで送れる）
   function openFrom(gallery, item) {
-    var nodes = gallery.querySelectorAll('figure, .gallery-item');
-    imgs = []; idx = 0;
+    var nodes = itemsOf(gallery);
+    imgs = []; idx = 0; single = false;
     nodes.forEach(function (n) {
       var im = n.querySelector('img');
       if (!im) return;
@@ -47,39 +63,66 @@
     });
     if (!imgs.length) return;
     var cap = item.querySelector('figcaption');
-    ensure();
-    document.getElementById('vehLbTitle').textContent = cap ? cap.textContent.trim() : '';
-    show();
-    document.getElementById('vehLightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    open(cap ? cap.textContent.trim() : '');
   }
 
-  function firstItem(gallery) {
-    var nodes = gallery.querySelectorAll('figure, .gallery-item');
-    for (var i = 0; i < nodes.length; i++) {
-      if (nodes[i].tagName !== 'BUTTON' && nodes[i].querySelector('img')) return nodes[i];
-    }
-    return null;
+  // 2枚目以降：その1枚だけを拡大
+  function openSingle(item) {
+    var im = item.querySelector('img');
+    if (!im) return;
+    imgs = [im.getAttribute('src')]; idx = 0; single = true;
+    var cap = item.querySelector('figcaption');
+    open(cap ? cap.textContent.trim() : '');
+  }
+
+  function itemsOf(gallery) {
+    var out = [];
+    gallery.querySelectorAll('figure, .gallery-item').forEach(function (n) {
+      if (n.tagName !== 'BUTTON' && n.querySelector('img')) out.push(n);
+    });
+    return out;
+  }
+
+  // 各ギャラリーにバッジを付与：先頭＝「写真をみる ○枚」、2枚目以降＝「拡大」
+  function decorate() {
+    document.querySelectorAll(GAL_SEL).forEach(function (gallery) {
+      var nodes = itemsOf(gallery);
+      if (nodes.length < 1) return;
+      nodes.forEach(function (n, i) {
+        if (n.querySelector('.gal-more, .gal-zoom')) return; // 既にバッジ有りは触らない
+        if (getComputedStyle(n).position === 'static') n.style.position = 'relative';
+        var b = document.createElement('span');
+        if (i === 0) { b.className = 'gal-more'; b.textContent = '写真をみる ' + nodes.length + '枚'; }
+        else { b.className = 'gal-zoom'; b.textContent = '拡大'; }
+        n.appendChild(b);
+        n.style.cursor = 'pointer';
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', decorate);
+  } else {
+    decorate();
   }
 
   document.addEventListener('click', function (e) {
-    var gallery = e.target.closest('.appliance-gallery, .rec-gallery, .facility-grid');
+    var gallery = e.target.closest(GAL_SEL);
     if (!gallery) return;
     var item = e.target.closest('figure, .gallery-item');
     if (!item || item.tagName === 'BUTTON') return; // ボタンは各ページのonclickに任せる
     if (!item.querySelector('img')) return;
-    // 同一ギャラリー内はどの写真をクリックしても同じ組が開くため、
-    // 先頭（左端）の1枚だけをクリック可能にし、それ以外は反応させない。
-    if (item !== firstItem(gallery)) return;
     e.preventDefault();
-    openFrom(gallery, item);
+    var nodes = itemsOf(gallery);
+    if (nodes.length && item === nodes[0]) openFrom(gallery, item); // 先頭＝全部
+    else openSingle(item);                                          // 2枚目以降＝1枚拡大
   });
 
   document.addEventListener('keydown', function (e) {
     var lb = document.getElementById('vehLightbox');
     if (!lb || !lb.classList.contains('open')) return;
     if (e.key === 'Escape') close();
-    else if (e.key === 'ArrowLeft') nav(-1);
-    else if (e.key === 'ArrowRight') nav(1);
+    else if (!single && e.key === 'ArrowLeft') nav(-1);
+    else if (!single && e.key === 'ArrowRight') nav(1);
   });
 })();
