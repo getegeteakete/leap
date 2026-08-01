@@ -1,11 +1,11 @@
-// お問い合わせフォーム受信 → Resend でメール送信
+// お問い合わせフォーム受信 → エックスサーバー SMTP でメール送信
 //
 // 必要な環境変数（Vercel のダッシュボードで設定）:
-//   RESEND_API_KEY      … Resend の API キー（必須）
-//   CONTACT_TO_EMAIL    … 受信先（任意。未設定なら leap@live.jp）
-//   CONTACT_FROM_EMAIL  … 送信元（任意。Resend で認証済みドメインのアドレス）
-//
-// ※ Resend では送信元ドメインの認証が必要です。認証前は onboarding@resend.dev で送信できます。
+//   SMTP_PASS           … support@leap-transport.com のメールパスワード（必須）
+//   CONTACT_TO_EMAIL    … 受信先（任意。未設定なら support@leap-transport.com）
+//   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
+
+import { sendMail, smtpConfigured, SMTP_USER } from './_mailer.js';
 
 // ベストエフォートのレート制限（ウォームインスタンス内のみ有効・スパム抑止）
 function rateLimited(req) {
@@ -26,11 +26,9 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'アクセスが集中しています。少し時間をおいて再度お試しください。' });
   }
 
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const TO = process.env.CONTACT_TO_EMAIL || 'leap@live.jp';
-  const FROM = process.env.CONTACT_FROM_EMAIL || 'お問い合わせ <onboarding@resend.dev>';
+  const TO = process.env.CONTACT_TO_EMAIL || SMTP_USER;
 
-  if (!RESEND_API_KEY) {
+  if (!smtpConfigured()) {
     return res.status(503).json({ error: 'メール送信が未設定です。お手数ですがお電話（048-796-3296）でご連絡ください。' });
   }
 
@@ -82,27 +80,13 @@ export default async function handler(req, res) {
   const subject = `【お問い合わせ】${d.category || ''} ${d.company} 様`.trim();
 
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: FROM,
-        to: [TO],
-        reply_to: d.email,
-        subject,
-        text,
-      }),
+    await sendMail({
+      fromName: '株式会社リープ お問い合わせフォーム',
+      to: TO,
+      replyTo: d.email,
+      subject,
+      text,
     });
-
-    if (!r.ok) {
-      const detail = await r.text().catch(() => '');
-      console.error('Resend error:', r.status, detail);
-      return res.status(502).json({ error: '送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
-    }
-
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('contact handler error:', err);

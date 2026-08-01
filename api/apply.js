@@ -1,14 +1,16 @@
-// 株式会社リープ 採用応募フォーム — サーバーレス送信（Resend Email API）
-// APIキー・送信先はサーバー側の環境変数にのみ保持し、ブラウザには出しません。
+// 株式会社リープ 採用応募フォーム — サーバーレス送信（エックスサーバー SMTP）
+// パスワード・送信先はサーバー側の環境変数にのみ保持し、ブラウザには出しません。
 // Vercel の Node ランタイム。/api/apply に POST。
 //
 // 必要な環境変数（Vercel ダッシュボードで設定）:
-//   RESEND_API_KEY      … Resend の API キー（必須）
-//   APPLY_FROM_EMAIL    … 送信元アドレス（Resendで検証済みドメインのもの。例: recruit@leap-transport.com）
-//   APPLY_TO_EMAIL      … 共通の応募受信先（営業所別が未設定の場合に使用）
+//   SMTP_PASS           … support@leap-transport.com のメールパスワード（必須）
+//   APPLY_TO_EMAIL      … 共通の応募受信先（任意。未設定なら support@leap-transport.com）
 //   APPLY_TO_HONSHA     … 本社の受信先（任意。未設定なら APPLY_TO_EMAIL）
 //   APPLY_TO_KANAGAWA   … 神奈川営業所の受信先（任意）
 //   APPLY_TO_IBARAKI    … 茨城営業所の受信先（任意）
+//   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
+
+import { sendMail, smtpConfigured, SMTP_USER } from './_mailer.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[<>&"]/g, (c) => (
@@ -36,14 +38,12 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method Not Allowed' }); return; }
   if (rateLimited(req)) { res.status(429).json({ error: 'アクセスが集中しています。少し時間をおいて再度お試しください。' }); return; }
 
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const FROM = process.env.APPLY_FROM_EMAIL || 'recruit@leap-transport.com';
-  const TO_COMMON = process.env.APPLY_TO_EMAIL || 'leap@live.jp';
+  const TO_COMMON = process.env.APPLY_TO_EMAIL || SMTP_USER;
   const TO_HONSHA = process.env.APPLY_TO_HONSHA || TO_COMMON;
   const TO_KANAGAWA = process.env.APPLY_TO_KANAGAWA || TO_COMMON;
   const TO_IBARAKI = process.env.APPLY_TO_IBARAKI || TO_COMMON;
 
-  if (!RESEND_API_KEY) {
+  if (!smtpConfigured()) {
     res.status(503).json({ error: 'メール送信が未設定です（管理者設定待ち）' });
     return;
   }
@@ -105,29 +105,18 @@ export default async function handler(req, res) {
     `年齢: ${age || '—'}\n希望勤務地: ${pref || '—'}\n志望動機: ${message || '—'}\n`;
 
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: `リープ採用フォーム <${FROM}>`,
-        to: [to],
-        reply_to: email,
-        subject: `【採用応募】${position}（${name} 様）`,
-        html,
-        text,
-      }),
+    await sendMail({
+      fromName: 'リープ採用フォーム',
+      to,
+      replyTo: email,
+      subject: `【採用応募】${position}（${name} 様）`,
+      html,
+      text,
     });
-
-    if (!r.ok) {
-      const detail = await r.text().catch(() => '');
-      res.status(502).json({ error: 'メール送信に失敗しました', detail: detail.slice(0, 300) });
-      return;
-    }
     res.status(200).json({ ok: true });
   } catch (err) {
-    res.status(500).json({ error: 'サーバーエラー', detail: String(err).slice(0, 300) });
+    // SMTPのエラー文面には認証情報やサーバー構成が含まれうるため、ブラウザには返さない
+    console.error('apply handler error:', err);
+    res.status(500).json({ error: 'メール送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
   }
 }
