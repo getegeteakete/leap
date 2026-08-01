@@ -119,7 +119,7 @@ function rateLimited(req) {
   return false;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method Not Allowed' }); return; }
 

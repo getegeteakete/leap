@@ -115,6 +115,8 @@ export default async function handler(req, res) {
     });
     res.status(200).json({ ok: true });
   } catch (err) {
-    res.status(500).json({ error: 'サーバーエラー', detail: String(err).slice(0, 300) });
+    // SMTPのエラー文面には認証情報やサーバー構成が含まれうるため、ブラウザには返さない
+    console.error('apply handler error:', err);
+    res.status(500).json({ error: 'メール送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
   }
 }
