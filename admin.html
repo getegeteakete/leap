@@ -22,6 +22,24 @@
   a{ color:var(--accent); }
   button{ font-family:inherit; cursor:pointer; }
   .hidden{ display:none !important; }
+  /* 操作手順書モーダル */
+  .modal.manual-modal{ max-width:760px; }
+  .manual-body{ line-height:1.85; font-size:14px; color:#3b455c; }
+  .manual-body h2{ font-size:16px; margin:26px 0 10px; padding-bottom:8px; border-bottom:2px solid var(--line); color:#0e1d36; }
+  .manual-body h2:first-child{ margin-top:0; }
+  .manual-body h3{ font-size:14px; margin:20px 0 8px; color:#0e1d36; }
+  .manual-body p{ margin:0 0 10px; }
+  .manual-body ul, .manual-body ol{ margin:0 0 12px; padding-left:22px; }
+  .manual-body li{ margin-bottom:6px; }
+  .manual-body table{ width:100%; border-collapse:collapse; margin:8px 0 14px; font-size:13px; }
+  .manual-body th, .manual-body td{ border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  .manual-body th{ background:#f5f7fa; font-weight:600; color:#0e1d36; }
+  .manual-body code{ background:#eef1f6; padding:2px 6px; border-radius:4px; font-size:12.5px; }
+  .manual-body pre{ background:#0e1d36; color:#e8edf5; padding:12px 14px; border-radius:8px; overflow:auto; margin:8px 0 12px; }
+  .manual-body pre code{ background:none; color:inherit; padding:0; }
+  .manual-body .note{ background:#fff8e8; border-left:3px solid #d99a3b; padding:12px 14px; border-radius:0 6px 6px 0; margin:10px 0 14px; font-size:13px; }
+  .manual-body .small{ font-size:12.5px; color:#6b7488; }
+  .manual-body hr{ border:none; border-top:1px solid var(--line); margin:30px 0 22px; }
 
   /* ---- ヘッダー ---- */
   header{
@@ -166,6 +184,7 @@
     <div class="brand">株式会社リープ<small>PHOTO ADMIN</small></div>
     <div class="spacer"></div>
     <span class="who" id="expLabel"></span>
+    <button class="btn ghost sm" id="manualBtn">操作手順書</button>
     <button class="btn ghost sm" id="logoutBtn">ログアウト</button>
   </header>
   <main>
@@ -177,6 +196,18 @@
     <div class="pagebar" id="pageBar"></div>
     <div class="grid" id="grid"></div>
   </main>
+</div>
+
+<!-- ===== 操作手順書モーダル ===== -->
+<div id="manualBack" class="modal-back hidden">
+  <div class="modal manual-modal">
+    <h3>操作手順書</h3>
+    <div class="body manual-body" id="manualBody"></div>
+    <div class="foot">
+      <span class="msg"></span>
+      <button class="btn" id="manualClose">閉じる</button>
+    </div>
+  </div>
 </div>
 
 <!-- ===== 差し替えモーダル ===== -->
@@ -473,6 +504,36 @@
   });
 
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#modalBack').classList.contains('hidden')) closeModal(); });
+
+  // ---------- 操作手順書 ----------
+  // 手順書には運用情報が含まれるため、ログイン済みのときだけAPIから取得して表示する
+  let manualCache = null;
+  function closeManual(){ $('#manualBack').classList.add('hidden'); }
+
+  $('#manualBtn').addEventListener('click', async () => {
+    $('#manualBack').classList.remove('hidden');
+    if (manualCache) { $('#manualBody').innerHTML = manualCache; return; }
+    $('#manualBody').innerHTML = '<p class="small">読み込んでいます…</p>';
+    try {
+      const r = await fetch('/api/admin/manual', { headers: { 'Authorization': 'Bearer ' + token() } });
+      const d = await r.json().catch(() => ({}));
+      if (r.status === 401) {
+        $('#manualBody').innerHTML = '<p>ログインの有効期限が切れています。再度ログインしてください。</p>';
+        return;
+      }
+      if (!r.ok || !d.html) {
+        $('#manualBody').innerHTML = '<p>' + esc(d.error || '手順書を読み込めませんでした。') + '</p>';
+        return;
+      }
+      manualCache = d.html;
+      $('#manualBody').innerHTML = d.html;
+    } catch (err) {
+      $('#manualBody').innerHTML = '<p>通信エラーが発生しました。時間をおいて再度お試しください。</p>';
+    }
+  });
+  $('#manualClose').addEventListener('click', closeManual);
+  $('#manualBack').addEventListener('click', (e) => { if (e.target === $('#manualBack')) closeManual(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#manualBack').classList.contains('hidden')) closeManual(); });
 
   // ---------- 起動 ----------
   if (tokenValid()) { showApp(); } else { clearToken(); showLogin(); }
