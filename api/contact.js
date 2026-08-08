@@ -36,7 +36,7 @@ export default async function handler(req, res) {
   if (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { d = {}; } }
   d = d || {};
 
-  // 必須チェック
+  // 必須チェック（窓口はフォーム側で必須指定。未指定でも受信は妨げない）
   if (!d.company || !d.contactName || !d.email) {
     return res.status(400).json({ error: '必須項目（貴社名・ご担当者名・メールアドレス）を入力してください。' });
   }
@@ -47,6 +47,7 @@ export default async function handler(req, res) {
 
   const labels = {
     category: 'お問い合わせ内容',
+    office: 'ご希望の窓口',
     company: '貴社名（お客様名）',
     companyKana: 'フリガナ',
     contactName: 'ご担当者名',
@@ -77,7 +78,9 @@ export default async function handler(req, res) {
     lines.join('\n') +
     '\n----------------------------------------\n';
 
-  const subject = `【お問い合わせ】${d.category || ''} ${d.company} 様`.trim();
+  // 件名だけで「問合せ / どの窓口 / 何について / どこから」が分かるようにする
+  const officeShort = String(d.office || '').replace('・春日部営業所', '').replace('営業所', '').replace('わからない・お任せ', 'お任せ');
+  const subject = `【HP問合せ｜${officeShort || '未指定'}｜${d.category || 'その他'}】${d.company} 様`;
 
   try {
     await sendMail({
