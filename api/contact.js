@@ -2,10 +2,14 @@
 //
 // 必要な環境変数（Vercel のダッシュボードで設定）:
 //   SMTP_PASS           … support@leap-transport.com のメールパスワード（必須）
-//   CONTACT_TO_EMAIL    … 受信先（任意。未設定なら support@leap-transport.com）
+//   CONTACT_TO_EMAIL    … 受信先（任意。未設定なら leap@live.jp）
 //   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
 
-import { sendMail, smtpConfigured, SMTP_USER } from './_mailer.js';
+import { sendMail, smtpConfigured } from './_mailer.js';
+
+// 受付アドレス。support@leap-transport.com は送信専用のため、
+// 受信は運用で使う leap@live.jp に集約する。
+const CONTACT_TO_DEFAULT = 'leap@live.jp';
 
 // ベストエフォートのレート制限（ウォームインスタンス内のみ有効・スパム抑止）
 function rateLimited(req) {
@@ -26,7 +30,7 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'アクセスが集中しています。少し時間をおいて再度お試しください。' });
   }
 
-  const TO = process.env.CONTACT_TO_EMAIL || SMTP_USER;
+  const TO = process.env.CONTACT_TO_EMAIL || CONTACT_TO_DEFAULT;
 
   if (!smtpConfigured()) {
     return res.status(503).json({ error: 'メール送信が未設定です。お手数ですがお電話（048-796-3296）でご連絡ください。' });

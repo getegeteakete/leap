@@ -4,13 +4,17 @@
 //
 // 必要な環境変数（Vercel ダッシュボードで設定）:
 //   SMTP_PASS           … support@leap-transport.com のメールパスワード（必須）
-//   APPLY_TO_EMAIL      … 共通の応募受信先（任意。未設定なら support@leap-transport.com）
+//   APPLY_TO_EMAIL      … 共通の応募受信先（任意。未設定なら leap@live.jp）
 //   APPLY_TO_HONSHA     … 本社の受信先（任意。未設定なら APPLY_TO_EMAIL）
 //   APPLY_TO_KANAGAWA   … 神奈川営業所の受信先（任意）
 //   APPLY_TO_IBARAKI    … 茨城営業所の受信先（任意）
 //   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
 
-import { sendMail, smtpConfigured, SMTP_USER } from './_mailer.js';
+import { sendMail, smtpConfigured } from './_mailer.js';
+
+// 受付アドレス。support@leap-transport.com は送信専用のため、
+// 受信は運用で使う leap@live.jp に集約する。
+const APPLY_TO_DEFAULT = 'leap@live.jp';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[<>&"]/g, (c) => (
@@ -38,7 +42,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method Not Allowed' }); return; }
   if (rateLimited(req)) { res.status(429).json({ error: 'アクセスが集中しています。少し時間をおいて再度お試しください。' }); return; }
 
-  const TO_COMMON = process.env.APPLY_TO_EMAIL || SMTP_USER;
+  const TO_COMMON = process.env.APPLY_TO_EMAIL || APPLY_TO_DEFAULT;
   const TO_HONSHA = process.env.APPLY_TO_HONSHA || TO_COMMON;
   const TO_KANAGAWA = process.env.APPLY_TO_KANAGAWA || TO_COMMON;
   const TO_IBARAKI = process.env.APPLY_TO_IBARAKI || TO_COMMON;
