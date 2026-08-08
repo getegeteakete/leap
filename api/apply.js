@@ -104,12 +104,18 @@ export default async function handler(req, res) {
     `お名前: ${name}（${kana}）\n電話番号: ${tel}\nメール: ${email}\n` +
     `年齢: ${age || '—'}\n希望勤務地: ${pref || '—'}\n志望動機: ${message || '—'}\n`;
 
+  // 件名だけで「求人 / どの営業所 / 職種 / 誰から」が分かるようにする
+  // position は「職種名｜勤務地」形式のため、勤務地部分は営業所表示と重複するので落とす
+  const officeShort = (office || '本社').replace('営業所', '');
+  const positionShort = position.split('｜')[0].replace(/募集$/, '').trim();
+  const subject = `【HP求人｜${officeShort}】${positionShort}／${name} 様`;
+
   try {
     await sendMail({
       fromName: 'リープ採用フォーム',
       to,
       replyTo: email,
-      subject: `【採用応募】${position}（${name} 様）`,
+      subject,
       html,
       text,
     });
