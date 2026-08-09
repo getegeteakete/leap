@@ -125,8 +125,13 @@ export default async function handler(req, res) {
     });
     res.status(200).json({ ok: true });
   } catch (err) {
-    // SMTPのエラー文面には認証情報やサーバー構成が含まれうるため、ブラウザには返さない
+    // SMTPのエラー文面には認証情報やサーバー構成が含まれうるため、ブラウザには返さない。
+    // code / smtp は種別を示す記号（EAUTH・535 など）のみで、画面には表示せず切り分けに使う。
     console.error('apply handler error:', err);
-    res.status(500).json({ error: 'メール送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
+    res.status(500).json({
+      error: 'メール送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。',
+      code: err && err.code ? String(err.code) : null,
+      smtp: err && err.responseCode ? err.responseCode : null,
+    });
   }
 }

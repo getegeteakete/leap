@@ -96,7 +96,13 @@ export default async function handler(req, res) {
     });
     return res.status(200).json({ ok: true });
   } catch (err) {
+    // エラー本文には認証情報やサーバー構成が含まれうるため、詳細はサーバーログにのみ残す。
+    // code / smtp は種別を示す記号（EAUTH・535 など）のみで、画面には表示せず切り分けに使う。
     console.error('contact handler error:', err);
-    return res.status(500).json({ error: '送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
+    return res.status(500).json({
+      error: '送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。',
+      code: err && err.code ? String(err.code) : null,
+      smtp: err && err.responseCode ? err.responseCode : null,
+    });
   }
 }

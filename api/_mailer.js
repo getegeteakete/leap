@@ -24,8 +24,13 @@ export async function sendMail({ fromName, to, replyTo, subject, text, html }) {
     secure: true, // 465 は SSL/TLS
     auth: {
       user: SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      // 管理画面へ貼り付ける際に紛れ込む前後の空白・改行を落とす
+      pass: String(process.env.SMTP_PASS || '').trim(),
     },
+    // 応答がない場合に関数のタイムアウトまで待たず、原因の分かるエラーで落とす
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000,
   });
 
   return transporter.sendMail({
