@@ -17,7 +17,13 @@ export function smtpConfigured() {
   return Boolean(process.env.SMTP_PASS);
 }
 
-export async function sendMail({ fromName, to, replyTo, subject, text, html }) {
+// CC の解決。環境変数が未設定なら既定値を使い、空文字を設定すると CC なしにできる。
+export function resolveCc(envValue, fallback) {
+  const v = envValue === undefined ? fallback : String(envValue).trim();
+  return v || undefined;
+}
+
+export async function sendMail({ fromName, to, cc, replyTo, subject, text, html }) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'sv96.xserver.jp',
     port: Number(process.env.SMTP_PORT || 465),
@@ -31,6 +37,7 @@ export async function sendMail({ fromName, to, replyTo, subject, text, html }) {
   return transporter.sendMail({
     from: fromName ? `${fromName} <${SMTP_USER}>` : SMTP_USER,
     to,
+    cc,
     replyTo,
     subject,
     text,

@@ -1,6 +1,7 @@
 // 株式会社リープ 採用応募フォーム — サーバーレス送信（エックスサーバー SMTP）
 // パスワード・送信先はサーバー側の環境変数にのみ保持し、ブラウザには出しません。
 // Vercel の Node ランタイム。/api/apply に POST。
+// 社内への通知メールに加え、応募者へ受付控え（自動返信）を送る。
 //
 // 必要な環境変数（Vercel ダッシュボードで設定）:
 //   SMTP_PASS           … support@leap-transport.com のメールパスワード（必須）
@@ -8,13 +9,17 @@
 //   APPLY_TO_HONSHA     … 本社の受信先（任意。未設定なら APPLY_TO_EMAIL）
 //   APPLY_TO_KANAGAWA   … 神奈川営業所の受信先（任意）
 //   APPLY_TO_IBARAKI    … 茨城営業所の受信先（任意）
+//   APPLY_CC_EMAIL      … CC 先（任意。未設定なら sup@ei-life.co.jp／空文字を設定すると CC なし）
 //   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
 
-import { sendMail, smtpConfigured } from './_mailer.js';
+import { sendMail, smtpConfigured, resolveCc } from './_mailer.js';
 
 // 受付アドレス。support@leap-transport.com は送信専用のため、
 // 受信は運用で使う leap@live.jp に集約する。
 const APPLY_TO_DEFAULT = 'leap@live.jp';
+
+// 保守側でも受信内容を確認できるように CC する。
+const APPLY_CC_DEFAULT = 'sup@ei-life.co.jp';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[<>&"]/g, (c) => (
@@ -46,6 +51,7 @@ export default async function handler(req, res) {
   const TO_HONSHA = process.env.APPLY_TO_HONSHA || TO_COMMON;
   const TO_KANAGAWA = process.env.APPLY_TO_KANAGAWA || TO_COMMON;
   const TO_IBARAKI = process.env.APPLY_TO_IBARAKI || TO_COMMON;
+  const CC = resolveCc(process.env.APPLY_CC_EMAIL, APPLY_CC_DEFAULT);
 
   if (!smtpConfigured()) {
     res.status(503).json({ error: 'メール送信が未設定です（管理者設定待ち）' });
@@ -114,19 +120,62 @@ export default async function handler(req, res) {
   const positionShort = position.split('｜')[0].replace(/募集$/, '').trim();
   const subject = `【HP求人｜${officeShort}】${positionShort}／${name} 様`;
 
+  // 応募者へお返しする受付控え（自動返信）
+  const autoReplyText =
+    `${name} 様\n\n` +
+    'このたびは株式会社リープの求人へご応募いただき、誠にありがとうございます。\n' +
+    '以下の内容でご応募を受け付けいたしました。採用担当より折り返しご連絡いたします。\n\n' +
+    '【ご応募内容】\n' +
+    '----------------------------------------\n' +
+    `応募職種：${position}\n` +
+    `応募先営業所：${office || '—'}\n` +
+    `お名前：${name}（${kana || '—'}）\n` +
+    `電話番号：${tel}\n` +
+    `メール：${email}\n` +
+    `年齢：${age || '—'}\n` +
+    `希望勤務地：${pref || '—'}\n` +
+    `志望動機・ご質問：${message || '—'}\n` +
+    '----------------------------------------\n\n' +
+    '※本メールは送信専用アドレスからの自動返信です。\n' +
+    '※本メールに心当たりがない場合は、お手数ですが下記までご連絡ください。\n' +
+    '※お急ぎの場合はお電話にてお問い合わせください。\n\n' +
+    '────────────────────────\n' +
+    '株式会社リープ\n' +
+    '〒344-0121 埼玉県春日部市上柳77\n' +
+    'TEL：048-796-3296／FAX：048-796-3298\n' +
+    '営業時間：平日 8:30〜18:00\n' +
+    'https://leap-red.vercel.app/\n' +
+    '────────────────────────\n';
+
   try {
     await sendMail({
       fromName: 'リープ採用フォーム',
       to,
+      cc: CC,
       replyTo: email,
       subject,
       html,
       text,
     });
-    res.status(200).json({ ok: true });
   } catch (err) {
     // SMTPのエラー文面には認証情報やサーバー構成が含まれうるため、ブラウザには返さない
     console.error('apply handler error:', err);
     res.status(500).json({ error: 'メール送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
+    return;
   }
+
+  // 自動返信は失敗しても社内通知は届いているため、送信結果を成功のまま返す
+  try {
+    await sendMail({
+      fromName: '株式会社リープ 採用担当',
+      to: email,
+      replyTo: to,
+      subject: '【株式会社リープ】ご応募を受け付けました',
+      text: autoReplyText,
+    });
+  } catch (err) {
+    console.error('apply auto-reply error:', err);
+  }
+
+  res.status(200).json({ ok: true });
 }
