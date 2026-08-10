@@ -7,7 +7,7 @@
 //   CONTACT_CC_EMAIL    … CC 先（任意。未設定なら sup@ei-life.co.jp／空文字を設定すると CC なし）
 //   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
 
-import { sendMail, smtpConfigured, resolveCc } from './_mailer.js';
+import { sendMail, smtpConfigured, resolveCc, mailErrorCode } from './_mailer.js';
 
 // 受付アドレス。support@leap-transport.com は送信専用のため、
 // 受信は運用で使う leap@live.jp に集約する。
@@ -123,7 +123,11 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('contact handler error:', err);
-    return res.status(500).json({ error: '送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
+    const code = mailErrorCode(err);
+    return res.status(500).json({
+      error: `送信に失敗しました（${code}）。お手数ですがお電話（048-796-3296）でご連絡ください。`,
+      code,
+    });
   }
 
   // 自動返信は失敗しても社内通知は届いているため、送信結果を成功のまま返す

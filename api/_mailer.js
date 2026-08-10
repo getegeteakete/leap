@@ -23,6 +23,14 @@ export function resolveCc(envValue, fallback) {
   return v || undefined;
 }
 
+// 送信失敗の原因（接続不可 ECONNECTION／認証失敗 EAUTH／タイムアウト ETIMEDOUT など）を
+// 画面から切り分けられるようにする。SMTP の応答文には認証情報やサーバー構成が
+// 含まれうるため、外に出すのは短いコードだけに留める。
+export function mailErrorCode(err) {
+  const code = err && (err.code || err.responseCode);
+  return code ? String(code).slice(0, 20) : 'UNKNOWN';
+}
+
 export async function sendMail({ fromName, to, cc, replyTo, subject, text, html }) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'sv96.xserver.jp',
@@ -32,6 +40,12 @@ export async function sendMail({ fromName, to, cc, replyTo, subject, text, html 
       user: SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    // サーバーレス関数の実行時間上限より先に諦めさせる。
+    // 上限に当たるとプラットフォームが HTML のエラーを返してしまい、
+    // 原因（接続不可なのか認証失敗なのか）が画面にもログにも残らないため。
+    connectionTimeout: 8000,
+    greetingTimeout: 8000,
+    socketTimeout: 15000,
   });
 
   return transporter.sendMail({
