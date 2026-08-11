@@ -160,6 +160,12 @@
     </div>
 
     <form class="cform" id="contactForm" onsubmit="return submitContact(event)">
+      <!-- 迷惑投稿の検知用。人間には見えないので常に空のまま送信される。
+           ボットが埋めた場合と、開いた直後に送信された場合をサーバー側で弾く。
+           display:none ではなく画面外に出すのは、非表示の項目を避けるボットにも
+           入力させるため。 -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"><label>ご住所2<input type="text" name="company_address2" tabindex="-1" autocomplete="off"></label></div>
+      <input type="hidden" name="form_opened_at" id="formOpenedAt">
       <div class="block-head" style="margin-top:24px;"><h2 style="font-size:20px;">基本情報</h2></div>
       <div class="field"><label>お問い合わせ内容<span class="req">必須</span></label>
         <select name="category" required><option value="">お選びください</option><option>一般貨物</option><option>家電設置</option><option>求人</option><option>その他</option></select></div>
@@ -286,6 +292,13 @@
 </div>
 <script src="/assets/app.js?v=17"></script>
 <script>
+// フォームを開いた時刻。開いた直後の送信は機械的な投稿とみなしてサーバー側で弾く。
+function stampFormOpened(){
+  var el = document.getElementById('formOpenedAt');
+  if(el) el.value = Date.now();
+}
+stampFormOpened();
+
 async function submitContact(e){
   e.preventDefault();
   var form = document.getElementById('contactForm');
@@ -300,6 +313,7 @@ async function submitContact(e){
     var j = await res.json().catch(function(){return{};});
     if(res.ok){
       form.querySelectorAll('input,select,textarea').forEach(function(el){ el.value=''; });
+      stampFormOpened();
       msg.style.color='var(--primary)'; msg.textContent='送信ありがとうございます。担当者より折り返しご連絡いたします。';
       btn.textContent='送信しました';
     }else{

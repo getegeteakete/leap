@@ -303,6 +303,10 @@
   <div class="block" id="apply">
     <div class="rec-head"><span class="eyebrow">ご応募</span><h2>応募フォーム</h2><p>電気工事士（業務委託パートナー）へのご応募は、下記フォームから受け付けております。お電話でも承ります（本社 048-796-3296／神奈川 042-401-4098／茨城 029-896-9700）。</p></div>
     <form class="apply-form" id="applyForm" onsubmit="submitApply(event)">
+      <!-- 迷惑投稿の検知用。人間には見えないので常に空のまま送信される。
+           ボットが埋めた場合と、開いた直後に送信された場合をサーバー側で弾く。 -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"><label>ご住所2<input type="text" name="company_address2" tabindex="-1" autocomplete="off"></label></div>
+      <input type="hidden" name="form_opened_at" id="formOpenedAt">
       <input type="hidden" name="office" value="">
       <div class="ap-grid">
         <div class="ap-field ap-full">
@@ -448,6 +452,13 @@
 @media(max-width:680px){ .ap-grid{ grid-template-columns:1fr; } }
 </style>
 <script>
+// フォームを開いた時刻。開いた直後の送信は機械的な投稿とみなしてサーバー側で弾く。
+function stampFormOpened(){
+  var el = document.getElementById('formOpenedAt');
+  if(el) el.value = Date.now();
+}
+stampFormOpened();
+
 async function submitApply(e){
   e.preventDefault();
   var form = e.target;
@@ -467,7 +478,7 @@ async function submitApply(e){
     if(r.ok){
       msg.style.color = 'var(--accent)';
       msg.textContent = 'ご応募ありがとうございます。担当者より折り返しご連絡いたします。';
-      form.reset();
+      form.reset(); stampFormOpened();
       btn.textContent = '送信完了';
     }else{
       var j = await r.json().catch(function(){ return {}; });

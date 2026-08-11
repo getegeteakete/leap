@@ -14,6 +14,7 @@
 
 import { sendMail, smtpConfigured, resolveCc, mailErrorCode } from './_mailer.js';
 import { officeSignature } from './_offices.js';
+import { spamCheck, headerSafe, SPAM_NOTICE } from './_spam.js';
 
 // 受付アドレス。support@leap-transport.com は送信専用のため、
 // 受信は運用で使う leap@live.jp に集約する。
@@ -85,6 +86,20 @@ export default async function handler(req, res) {
     return;
   }
 
+  // 迷惑メール判定。全項目を対象にするのは、どの欄に宣伝文を入れられても弾くため。
+  const spam = spamCheck({
+    body,
+    text: [position, office, name, kana, tel, email, age, pref, message].join(' '),
+    now: Date.now(),
+  });
+  if (spam.spam) {
+    console.warn('apply blocked as spam:', spam.reason);
+    // ボットが確実な場合は、弾いたことを教えず成功したように見せる。
+    if (spam.silent) { res.status(200).json({ ok: true }); return; }
+    res.status(400).json({ error: SPAM_NOTICE });
+    return;
+  }
+
   // 送信先の営業所振り分け
   let to = TO_HONSHA;
   if (office.includes('神奈川')) to = TO_KANAGAWA;
@@ -117,9 +132,9 @@ export default async function handler(req, res) {
 
   // 件名だけで「求人 / どの営業所 / 職種 / 誰から」が分かるようにする
   // position は「職種名｜勤務地」形式のため、勤務地部分は営業所表示と重複するので落とす
-  const officeShort = (office || '本社').replace('営業所', '');
-  const positionShort = position.split('｜')[0].replace(/募集$/, '').trim();
-  const subject = `【HP求人｜${officeShort}】${positionShort}／${name} 様`;
+  const officeShort = (headerSafe(office, 40) || '本社').replace('営業所', '');
+  const positionShort = headerSafe(position, 80).split('｜')[0].replace(/募集$/, '').trim();
+  const subject = `【HP求人｜${officeShort}】${positionShort}／${headerSafe(name, 60)} 様`;
 
   // 応募者へお返しする受付控え（自動返信）
   const autoReplyText =
