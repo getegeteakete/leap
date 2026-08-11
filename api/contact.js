@@ -1,15 +1,20 @@
 // お問い合わせフォーム受信 → エックスサーバー SMTP でメール送信
+// 社内への通知メールに加え、送信者へ受付控え（自動返信）を送る。
 //
 // 必要な環境変数（Vercel のダッシュボードで設定）:
 //   SMTP_PASS           … support@leap-transport.com のメールパスワード（必須）
 //   CONTACT_TO_EMAIL    … 受信先（任意。未設定なら leap@live.jp）
+//   CONTACT_CC_EMAIL    … CC 先（任意。未設定なら sup@ei-life.co.jp／空文字を設定すると CC なし）
 //   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
 
-import { sendMail, smtpConfigured } from './_mailer.js';
+import { sendMail, smtpConfigured, resolveCc, mailErrorCode } from './_mailer.js';
 
 // 受付アドレス。support@leap-transport.com は送信専用のため、
 // 受信は運用で使う leap@live.jp に集約する。
 const CONTACT_TO_DEFAULT = 'leap@live.jp';
+
+// 保守側でも受信内容を確認できるように CC する。
+const CONTACT_CC_DEFAULT = 'sup@ei-life.co.jp';
 
 // ベストエフォートのレート制限（ウォームインスタンス内のみ有効・スパム抑止）
 function rateLimited(req) {
@@ -31,6 +36,7 @@ export default async function handler(req, res) {
   }
 
   const TO = process.env.CONTACT_TO_EMAIL || CONTACT_TO_DEFAULT;
+  const CC = resolveCc(process.env.CONTACT_CC_EMAIL, CONTACT_CC_DEFAULT);
 
   if (!smtpConfigured()) {
     return res.status(503).json({ error: 'メール送信が未設定です。お手数ですがお電話（048-796-3296）でご連絡ください。' });
@@ -82,6 +88,26 @@ export default async function handler(req, res) {
     lines.join('\n') +
     '\n----------------------------------------\n';
 
+  // 送信者へお返しする受付控え（自動返信）
+  const autoReplyText =
+    `${d.contactName} 様\n\n` +
+    'このたびは株式会社リープへお問い合わせいただき、誠にありがとうございます。\n' +
+    '以下の内容でお問い合わせを受け付けいたしました。担当者より折り返しご連絡いたします。\n\n' +
+    '【お問い合わせ内容】\n' +
+    '----------------------------------------\n' +
+    lines.join('\n') +
+    '\n----------------------------------------\n\n' +
+    '※本メールは送信専用アドレスからの自動返信です。\n' +
+    '※本メールに心当たりがない場合は、お手数ですが下記までご連絡ください。\n' +
+    '※お急ぎの場合はお電話にてお問い合わせください。\n\n' +
+    '────────────────────────\n' +
+    '株式会社リープ\n' +
+    '〒344-0121 埼玉県春日部市上柳77\n' +
+    'TEL：048-796-3296／FAX：048-796-3298\n' +
+    '営業時間：平日 8:30〜18:00\n' +
+    'https://leap-red.vercel.app/\n' +
+    '────────────────────────\n';
+
   // 件名だけで「問合せ / どの窓口 / 何について / どこから」が分かるようにする
   const officeShort = String(d.office || '').replace('・春日部営業所', '').replace('営業所', '').replace('わからない・お任せ', 'お任せ');
   const subject = `【HP問合せ｜${officeShort || '未指定'}｜${d.category || 'その他'}】${d.company} 様`;
@@ -90,13 +116,32 @@ export default async function handler(req, res) {
     await sendMail({
       fromName: '株式会社リープ お問い合わせフォーム',
       to: TO,
+      cc: CC,
       replyTo: d.email,
       subject,
       text,
     });
-    return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('contact handler error:', err);
-    return res.status(500).json({ error: '送信に失敗しました。お手数ですがお電話（048-796-3296）でご連絡ください。' });
+    const code = mailErrorCode(err);
+    return res.status(500).json({
+      error: `送信に失敗しました（${code}）。お手数ですがお電話（048-796-3296）でご連絡ください。`,
+      code,
+    });
   }
+
+  // 自動返信は失敗しても社内通知は届いているため、送信結果を成功のまま返す
+  try {
+    await sendMail({
+      fromName: '株式会社リープ',
+      to: d.email,
+      replyTo: TO,
+      subject: '【株式会社リープ】お問い合わせを受け付けました',
+      text: autoReplyText,
+    });
+  } catch (err) {
+    console.error('contact auto-reply error:', err);
+  }
+
+  return res.status(200).json({ ok: true });
 }
