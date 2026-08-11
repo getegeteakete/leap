@@ -9,6 +9,7 @@
 
 import { sendMail, smtpConfigured, resolveCc, mailErrorCode } from './_mailer.js';
 import { officeSignature } from './_offices.js';
+import { spamCheck, headerSafe, SPAM_NOTICE, HONEYPOT_FIELD, TIMESTAMP_FIELD } from './_spam.js';
 
 // 受付アドレス。support@leap-transport.com は送信専用のため、
 // 受信は運用で使う leap@live.jp に集約する。
@@ -54,6 +55,20 @@ export default async function handler(req, res) {
   // 簡易メール形式チェック
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) {
     return res.status(400).json({ error: 'メールアドレスの形式をご確認ください。' });
+  }
+
+  // 迷惑メール判定。全項目を対象にするのは、どの欄に宣伝文を入れられても弾くため。
+  const spam = spamCheck({
+    body: d,
+    text: Object.values(d).join(' '),
+    now: Date.now(),
+  });
+  if (spam.spam) {
+    console.warn('contact blocked as spam:', spam.reason);
+    // ボットが確実な場合は、弾いたことを教えず成功したように見せる。
+    // 教えると条件を変えて再投稿されるため。
+    if (spam.silent) return res.status(200).json({ ok: true });
+    return res.status(400).json({ error: SPAM_NOTICE });
   }
 
   const labels = {
@@ -104,8 +119,8 @@ export default async function handler(req, res) {
     officeSignature(d.office);
 
   // 件名だけで「問合せ / どの窓口 / 何について / どこから」が分かるようにする
-  const officeShort = String(d.office || '').replace('・春日部営業所', '').replace('営業所', '').replace('わからない・お任せ', 'お任せ');
-  const subject = `【HP問合せ｜${officeShort || '未指定'}｜${d.category || 'その他'}】${d.company} 様`;
+  const officeShort = headerSafe(d.office, 40).replace('・春日部営業所', '').replace('営業所', '').replace('わからない・お任せ', 'お任せ');
+  const subject = `【HP問合せ｜${officeShort || '未指定'}｜${headerSafe(d.category, 40) || 'その他'}】${headerSafe(d.company, 80)} 様`;
 
   try {
     await sendMail({
