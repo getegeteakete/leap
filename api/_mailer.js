@@ -57,7 +57,7 @@ export async function sendMail({ fromName, to, cc, replyTo, subject, text, html 
   });
 
   try {
-    return await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: fromName ? `${fromName} <${SMTP_USER}>` : SMTP_USER,
       to,
       cc,
@@ -66,6 +66,15 @@ export async function sendMail({ fromName, to, cc, replyTo, subject, text, html 
       text,
       html,
     });
+    // 「送信できた」と「相手に届いた」は別。ここで分かるのは SMTP サーバーが
+    // 引き受けたところまでなので、どの宛先を受理／拒否したかを記録しておく。
+    console.log('sendMail accepted:', {
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+      response: info.response,
+    });
+    return info;
   } catch (err) {
     // どの接続先・どの認証ユーザーで失敗したかがログから分かるようにする。
     // パスワードは出さず、設定されているかと文字数だけを記録する。
