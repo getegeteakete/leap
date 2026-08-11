@@ -8,6 +8,7 @@
 //   SMTP_HOST / SMTP_PORT / SMTP_USER … api/_mailer.js の既定値を上書きする場合のみ
 
 import { sendMail, smtpConfigured, resolveCc, mailErrorCode } from './_mailer.js';
+import { officeSignature } from './_offices.js';
 
 // 受付アドレス。support@leap-transport.com は送信専用のため、
 // 受信は運用で使う leap@live.jp に集約する。
@@ -100,13 +101,7 @@ export default async function handler(req, res) {
     '※本メールは送信専用アドレスからの自動返信です。\n' +
     '※本メールに心当たりがない場合は、お手数ですが下記までご連絡ください。\n' +
     '※お急ぎの場合はお電話にてお問い合わせください。\n\n' +
-    '────────────────────────\n' +
-    '株式会社リープ\n' +
-    '〒344-0121 埼玉県春日部市上柳77\n' +
-    'TEL：048-796-3296／FAX：048-796-3298\n' +
-    '営業時間：平日 8:30〜18:00\n' +
-    'https://leap-red.vercel.app/\n' +
-    '────────────────────────\n';
+    officeSignature(d.office);
 
   // 件名だけで「問合せ / どの窓口 / 何について / どこから」が分かるようにする
   const officeShort = String(d.office || '').replace('・春日部営業所', '').replace('営業所', '').replace('わからない・お任せ', 'お任せ');
