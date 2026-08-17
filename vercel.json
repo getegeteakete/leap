@@ -1,6 +1,14 @@
 {
   "version": 2,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "leap-red.vercel.app" }],
+      "destination": "https://leap-transport.com/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
