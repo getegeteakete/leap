@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /api/
 
-Sitemap: https://leap-transport.com/sitemap.xml
+Sitemap: https://leap-red.vercel.app/sitemap.xml

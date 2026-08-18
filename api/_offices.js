@@ -50,6 +50,6 @@ export function officeSignature(officeText) {
   if (o !== HONSHA) {
     lines.push('', `本社 TEL：${HONSHA.tel}`);
   }
-  lines.push('https://leap-transport.com/', '────────────────────────');
+  lines.push('https://leap-red.vercel.app/', '────────────────────────');
   return lines.join('\n') + '\n';
 }
