@@ -1,4 +1,5 @@
 {
+  "_comment_hsts": "ドメイン移行期間中は HSTS を 300 秒に短縮している。max-age を長くすると、切り戻し先（エックスサーバー）の SSL 証明書が切れた時点でブラウザが HTTPS を強制し続け、旧サイトに戻せなくなるため。leap-transport.com での配信が 1〜2 週間安定したら max-age=31536000; includeSubDomains に戻すこと。",
   "version": 2,
   "trailingSlash": false,
   "redirects": [
@@ -17,7 +18,7 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), payment=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+        { "key": "Strict-Transport-Security", "value": "max-age=300" }
       ]
     },
     { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] }
