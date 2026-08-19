@@ -286,6 +286,10 @@ a.office-link:hover .office-more { color: var(--accent); }
 .chat-msg-bubble { max-width: 80%; padding: 12px 16px; border-radius: var(--r); font-size: 13px; line-height: 1.8; white-space: pre-wrap; }
 .chat-msg.user .chat-msg-bubble { background: var(--primary); color: #fff; }
 .chat-msg.bot .chat-msg-bubble { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+/* 返答内のURL・ページ・電話番号は押せるようにしているので、リンクだと分かる見た目にする */
+.chat-msg-bubble a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
+.chat-msg-bubble a:hover { text-decoration: none; }
+.chat-msg.user .chat-msg-bubble a { color: #fff; }
 .chat-input-area { padding: 16px; background: #fff; border-top: 1px solid var(--line); display: flex; gap: 8px; }
 .chat-input { flex: 1; padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--r); font-size: 13px; font-family: 'Noto Sans JP', sans-serif; outline: none; }
 .chat-input:focus { border-color: var(--primary); }
