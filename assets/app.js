@@ -152,10 +152,49 @@ function escHtml(s) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
   });
 }
+
+// すでにリンクにした部分は二重に置換しないよう、<a>〜</a> の外側だけを対象にする
+function replaceOutsideLinks(html, re, fn) {
+  return html.split(/(<a\b[^>]*>[\s\S]*?<\/a>)/g).map(function (part) {
+    return part.slice(0, 2) === '<a' ? part : part.replace(re, fn);
+  }).join('');
+}
+
+// 返答の本文を表示用のHTMLにする。
+// URL・ページ・電話番号はそのままでは押せないため、リンクにして開けるようにする。
+// 記号による装飾は使わない方針だが、万一混ざったときに画面へ出さないよう取り除く。
+function renderReply(text) {
+  var s = String(text == null ? '' : text);
+  s = s.replace(/\*\*([\s\S]+?)\*\*/g, '$1').replace(/__([\s\S]+?)__/g, '$1');
+  s = s.replace(/^#{1,6}\s+/gm, '').replace(/^\s*[-*]\s+/gm, '・');
+
+  var html = escHtml(s);
+
+  // https:// で始まるURL。URLに使える文字だけを拾うので、直後に「・」や「）」が続いても巻き込まない。
+  html = html.replace(/https?:\/\/[A-Za-z0-9\-._~:/?#[\]@!$&*+,;=%()]+/g, function (u) {
+    var tail = (u.match(/[.,、。）)\]】]+$/) || [''])[0];
+    if (tail) u = u.slice(0, u.length - tail.length);
+    return '<a href="' + u + '" target="_blank" rel="noopener">' + u + '</a>' + tail;
+  });
+
+  // /contact.html のようなサイト内のページ
+  html = replaceOutsideLinks(html, /(^|[\s（(「『])(\/[A-Za-z0-9_-]+\.html)/g, function (m, pre, path) {
+    return pre + '<a href="' + path + '">' + path + '</a>';
+  });
+
+  // 電話番号。スマートフォンではそのまま発信できる。
+  html = replaceOutsideLinks(html, /0\d{1,3}-\d{2,4}-\d{4}/g, function (t) {
+    return '<a href="tel:' + t.replace(/-/g, '') + '">' + t + '</a>';
+  });
+
+  return html.replace(/\n/g, '<br>');
+}
+
 function addMessage(role, text) {
   const w = document.createElement('div');
   w.className = 'chat-msg ' + role;
-  w.innerHTML = '<div class="chat-msg-bubble">' + escHtml(text).replace(/\n/g, '<br>') + '</div>';
+  const body = role === 'bot' ? renderReply(text) : escHtml(text).replace(/\n/g, '<br>');
+  w.innerHTML = '<div class="chat-msg-bubble">' + body + '</div>';
   document.getElementById('chatMessages').appendChild(w);
   document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
 }
