@@ -156,7 +156,14 @@
 <div class="content narrow">
   <div class="block">
     <div class="block-head"><span class="eyebrow">新着情報</span><h2>お知らせ一覧</h2></div>
-    <div class="news-list"><div class="news-row" id="news-2026-08-12" style="cursor:default;scroll-margin-top:140px;">
+    <div class="news-list"><div class="news-row" id="news-2026-09-16" style="cursor:default;scroll-margin-top:140px;">
+      <time>2026-09-16</time><span class="cat">NEWS</span>
+      <div><div class="ttl" style="font-weight:600;margin-bottom:6px;">本社営業所に20周年記念車が納車されました</div><p style="font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--ink-2);line-height:1.9;">このたび本社営業所に、創業20周年を記念した新車が納車されました。ボディに20周年の記念ロゴを掲げた、いすゞフォワードの4トンウイング車です。一般貨物の配送に加え、産業廃棄物収集運搬車としてもご対応いたします。20周年の節目を迎えても変わらず、皆様からお預かりした大切な荷物を「運ぶ信頼、届ける真心」でお運びいたします。</p>
+      <div class="news-photos two">
+        <img src="/assets/real-news-2026-20th-truck-1.jpg" alt="本社営業所に納車された20周年記念車（側面。20th Anniversaryのロゴ入り）" loading="lazy">
+        <img src="/assets/real-news-2026-20th-truck-2.jpg" alt="本社営業所に納車された20周年記念車（正面。いすゞフォワード）" loading="lazy">
+      </div></div>
+    </div><div class="news-row" id="news-2026-08-12" style="cursor:default;scroll-margin-top:140px;">
       <time>2026-08-12</time><span class="cat">NEWS</span>
       <div><div class="ttl" style="font-weight:600;margin-bottom:6px;">新車導入</div><p style="font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--ink-2);line-height:1.9;">2トン標準ロング車を3台導入いたしました。本社営業所に2台、茨城営業所に1台を配備しております。創業20周年の記念ロゴを掲げた車輌です。これからも変わらず、皆様からお預かりした大切な荷物を「運ぶ信頼、届ける真心」でお運びいたします。</p>
       <div class="news-photos">
@@ -276,13 +283,20 @@
   </div>
 </div>
 <style>
+/* 写真入りの本文がスマホで横にはみ出さないよう、本文欄を行の幅に収める */
+.news-row > div{ min-width:0; }
+@media (max-width:640px){ .news-row > div{ flex:1 1 100%; } }
 /* お知らせ本文に添える写真。縦横が混在するため、高さを揃えて切り出す */
 .news-photos{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
 .news-photos img{ width:100%; height:180px; object-fit:cover; border-radius:var(--r); display:block; background:var(--bg-2); }
+/* 写真が2枚の記事は2列で大きめに見せる */
+.news-photos.two{ grid-template-columns:1fr 1fr; }
+.news-photos.two img{ height:240px; }
 @media (max-width:640px){
   .news-photos{ grid-template-columns:1fr 1fr; gap:8px; }
   .news-photos img{ height:130px; }
   .news-photos img:first-child{ grid-column:1 / -1; height:200px; }
+  .news-photos.two img{ grid-column:1 / -1; height:200px; }
 }
 </style>
 <script src="/assets/app.js?v=18"></script>
