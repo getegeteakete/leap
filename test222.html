@@ -186,6 +186,45 @@
   <p class="anniversary-delivery__caption">1台からはじまり、やがて街中へ配送の輪が広がる</p>
 </section>
 
+<!-- お知らせ（TOP確認用） -->
+<section class="arrival-news" aria-labelledby="arrival-news-title">
+  <div class="arrival-news__inner">
+    <div class="arrival-news__heading">
+      <p class="arrival-news__eyebrow">NEWS / 2026.10</p>
+      <h2 id="arrival-news-title">20周年記念車両を<br>茨城営業所へ導入しました。</h2>
+    </div>
+    <div class="arrival-news__body">
+      <p class="arrival-news__lead">このたび、茨城営業所に<strong>4tフルワイド格納ゲート車両</strong>と<strong>2tロング車両</strong>を導入しました。荷台には、株式会社リープのロゴと20周年アニバーサリーマークをあしらっています。</p>
+      <p>新しい車両とともに、これからも安全で確実な配送をお届けします。</p>
+      <dl class="arrival-news__fleet">
+        <div><dt>全社保有車両</dt><dd><strong>66</strong> 台</dd></div>
+        <div><dt>茨城営業所</dt><dd><strong>19</strong> 台</dd></div>
+        <div><dt>4tフルワイド格納ゲート</dt><dd><strong>3</strong> 台</dd></div>
+        <div><dt>2t標準ロング</dt><dd><strong>7</strong> 台</dd></div>
+      </dl>
+    </div>
+    <div class="arrival-news__vehicles">
+      <article class="arrival-news__vehicle">
+        <h3>4tフルワイド格納ゲート車両</h3>
+        <div class="arrival-news__photos">
+          <figure class="arrival-news__photo arrival-news__photo--main"><img src="/assets/test222-ibaraki-4t-front.jpg" alt="茨城営業所に導入した青い4tフルワイド格納ゲート車両"><figcaption>4tフルワイド格納ゲート車両</figcaption></figure>
+          <figure class="arrival-news__photo"><img src="/assets/test222-ibaraki-4t-side.jpg" alt="20周年マークとLeap Co.,Ltd.ロゴを施した車両側面"><figcaption>20周年記念デザイン</figcaption></figure>
+          <figure class="arrival-news__photo"><img src="/assets/test222-ibaraki-4t-rear.jpg" alt="20周年マークと株式会社リープのロゴを施した車両後部"><figcaption>後部にも記念マークを掲出</figcaption></figure>
+          <figure class="arrival-news__photo"><img src="/assets/test222-ibaraki-4t-angle.jpg" alt="茨城営業所に導入した4t車両の前方斜めからの写真"><figcaption>茨城営業所で運行開始</figcaption></figure>
+        </div>
+      </article>
+      <article class="arrival-news__vehicle">
+        <h3>2tロング車両</h3>
+        <div class="arrival-news__photos arrival-news__photos--compact">
+          <figure class="arrival-news__photo arrival-news__photo--main"><img src="/assets/test222-ibaraki-2t-angle.jpg" alt="20周年マークを施した茨城営業所の青い2tロング車両"><figcaption>2tロング車両</figcaption></figure>
+          <figure class="arrival-news__photo"><img src="/assets/test222-ibaraki-2t-side.jpg" alt="茨城営業所の建物前に停車する2tロング車両"><figcaption>茨城営業所で運行開始</figcaption></figure>
+          <figure class="arrival-news__photo"><img src="/assets/test222-ibaraki-2t-rear.jpg" alt="20周年アニバーサリーマークとLeap Co.,Ltd.ロゴを施した2tロング車両後部"><figcaption>後部にも記念マークを掲出</figcaption></figure>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- 信頼の数字（4つの強み） -->
 <section class="strengths">
   <div class="str-inner">
@@ -237,7 +276,7 @@
       </div>
       <div class="str-divider"></div>
       <div class="str-body">
-        <div class="trust-num str-num" data-count="59" data-suffix="台"><span class="count-num">0</span><small>台</small></div>
+        <div class="trust-num str-num" data-count="66" data-suffix="台"><span class="count-num">0</span><small>台</small></div>
         <div class="str-label">自社保有車両</div>
       </div>
     </div>
@@ -619,6 +658,14 @@
 .anniversary-delivery__caption{position:absolute;z-index:6;right:clamp(18px,6vw,96px);bottom:clamp(16px,3vw,42px);margin:0;padding:10px 16px;border-radius:999px;color:#fff;background:rgba(8,39,78,.85);font-size:.78rem;letter-spacing:.06em;}
 @media(max-width:768px){.anniversary-delivery{height:360px}.anniversary-truck--middle{bottom:17%}.anniversary-truck--far{bottom:29%}.anniversary-truck--near2{bottom:10%}.anniversary-truck--far2{bottom:32%}.anniversary-delivery__caption{max-width:72%;font-size:.68rem;}}
 @media(prefers-reduced-motion:reduce){.anniversary-truck{animation:none}.anniversary-truck--near{transform:translateX(8vw)}.anniversary-truck--middle{transform:translateX(42vw)}.anniversary-truck--far{transform:translateX(64vw)}.anniversary-truck--near2{transform:translateX(77vw)}.anniversary-truck--far2{transform:translateX(88vw)}}
+
+/* test222: 20周年記念車両のお知らせ */
+.arrival-news{background:#f3f7fa;padding:clamp(56px,8vw,108px) 24px;}
+.arrival-news__inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(270px,.82fr) minmax(0,1.18fr);gap:30px 64px;}
+.arrival-news__heading{padding-top:6px;}.arrival-news__eyebrow{margin:0 0 14px;color:#1573af;font-size:.72rem;font-weight:700;letter-spacing:.16em;}.arrival-news h2{margin:0;color:#112b4c;font-size:clamp(1.75rem,3vw,2.7rem);line-height:1.35;letter-spacing:.04em;}.arrival-news__body{font-size:.96rem;line-height:2;color:#384858;}.arrival-news__body p{margin:0 0 10px;}.arrival-news__lead{font-size:1.04rem;color:#1b314d;}.arrival-news__lead strong{color:#0c669e;}.arrival-news__fleet{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:24px 0 0;background:#ced8e1;border:1px solid #ced8e1;}.arrival-news__fleet div{padding:13px 10px;background:#fff;text-align:center;}.arrival-news__fleet dt{font-size:.67rem;color:#5e7183;letter-spacing:.04em;}.arrival-news__fleet dd{margin:3px 0 0;font-size:.8rem;color:#223d59;}.arrival-news__fleet strong{font-size:1.4rem;color:#0c669e;line-height:1;}.arrival-news__photos{grid-column:1/-1;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:14px;}.arrival-news__photo{margin:0;min-height:185px;position:relative;overflow:hidden;background:#17324d;}.arrival-news__photo--main{grid-row:span 2;min-height:384px;}.arrival-news__photo img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform .45s ease;}.arrival-news__photo:hover img{transform:scale(1.035);}.arrival-news__photo figcaption{position:absolute;left:0;right:0;bottom:0;margin:0;padding:24px 17px 13px;color:#fff;font-size:.75rem;letter-spacing:.06em;background:linear-gradient(transparent,rgba(5,18,35,.76));}
+@media(max-width:760px){.arrival-news__inner{grid-template-columns:1fr;gap:20px;}.arrival-news__photos{grid-template-columns:1fr 1fr;gap:9px;}.arrival-news__photo--main{grid-column:1/-1;grid-row:auto;min-height:280px;}.arrival-news__photo{min-height:155px;}.arrival-news__fleet{margin-top:18px;}.arrival-news__fleet div{padding:10px 5px;}.arrival-news__fleet dt{font-size:.58rem;}.arrival-news__fleet strong{font-size:1.22rem;}}
+.arrival-news__fleet{grid-template-columns:repeat(4,1fr);}.arrival-news__vehicles{grid-column:1/-1;display:grid;gap:50px;}.arrival-news__vehicle h3{margin:0 0 15px;padding-left:14px;border-left:3px solid #0c669e;color:#173d63;font-size:1.05rem;letter-spacing:.06em;}.arrival-news__vehicles .arrival-news__photos{grid-column:auto;}.arrival-news__photos--compact .arrival-news__photo--main{grid-row:span 1;}
+@media(max-width:760px){.arrival-news__fleet{grid-template-columns:1fr 1fr;}.arrival-news__vehicles{gap:38px;}}
 </style>
 </body>
 </html>
