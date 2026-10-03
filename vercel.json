@@ -5,6 +5,10 @@
     {
       "source": "/test222",
       "destination": "/test222.html"
+    },
+    {
+      "source": "/test222-news",
+      "destination": "/test222-news.html"
     }
   ],
   "redirects": [
