@@ -1136,6 +1136,25 @@ video.page-hero-bg{background:var(--ink);}
 .nav .mega-card-photo:hover .mega-thumb img{ transform:scale(1.06); }
 .nav .mega-card-photo .mega-txt{ padding:11px 13px 13px; gap:4px; }
 
+/* === メガメニュー：横3列で画面内に収める === */
+@media (min-width:981px){
+  .nav .mega{
+    left:50%; right:auto; width:min(780px, calc(100vw - 32px)); min-width:0;
+    max-height:calc(100vh - 132px); overflow-y:auto;
+    transform:translateX(-50%) translateY(8px);
+  }
+  .nav .has-mega:hover .mega,
+  .nav .has-mega:focus-within .mega{ opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+  .nav .has-mega:last-of-type .mega{ left:auto; right:0; transform:translateY(8px); }
+  .nav .has-mega:last-of-type:hover .mega,
+  .nav .has-mega:last-of-type:focus-within .mega{ transform:translateY(0); }
+  .nav .mega-grid-photo,
+  .nav .mega-grid-3{ grid-template-columns:repeat(3, minmax(0, 1fr)); min-width:0; }
+  .nav .mega-card-photo .mega-thumb,
+  .nav .mega-grid-3 .mega-card-photo .mega-thumb{ height:72px; }
+  .nav .mega-card-photo .mega-txt{ padding:9px 11px 11px; }
+}
+
 /* === 募集職種一覧（求人ページ上部） === */
 .job-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
 .job-list-card{ display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; text-decoration:none; transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease; }
